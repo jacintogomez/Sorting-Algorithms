@@ -1,0 +1,3 @@
+/Users/jacintogomez/Downloads/bridgeprogs/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/jacintogomez/Downloads/bridgeprogs/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/jacintogomez/Downloads/bridgeprogs/cmake-build-debug/CMakeFiles/bridgeprogs.dir
