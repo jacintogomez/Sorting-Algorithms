@@ -61,7 +61,7 @@ void bubble(vector<int> ar){
         if(swap) {
             cout << " " << ar[i] << " was the next largest, and was 'bubbled' up to the end" << endl;
         }else{
-            cout<<" next largest element "<<ar[i]<<" already in position"<<endl;
+            cout<<" next largest element "<<ar[i]<<" is already in sorted position"<<endl;
         }
     }
     cout<<"Final Sorted Array: ";
@@ -70,7 +70,8 @@ void bubble(vector<int> ar){
 
 int main(){
     //vector<int> list={999,104,2,1024,16};
-    vector<int> list={1,2,3,4,5};
+    vector<int> list={9,88,2000,100,43,546,2,32};
+    cout<<"Bubble Sort"<<endl;
     cout<<"Original Array: ";
     print(list);
     bubble(list);

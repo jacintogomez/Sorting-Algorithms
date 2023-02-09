@@ -42,9 +42,9 @@ void insertion(vector<int> ar){
         print(ar);
         printsortedportion(countspaces(ar,i));
         if(key!=temp) {
-            cout << key << " was placed before " << temp << endl;
+            cout << key << " was inserted before " << temp << endl;
         }else{
-            cout<<"no substitutions were necessary"<<endl;
+            cout<<"no insertions were necessary"<<endl;
         }
     }
     cout<<"Final Sorted Array: ";
@@ -52,8 +52,9 @@ void insertion(vector<int> ar){
 }
 
 int main(){
-    vector<int> list={999,104,2,1024,16};
+    vector<int> list={9,88,2000,100,43,546,2,32};
     //vector<int> list={5,4,3,2,1};
+    cout<<"Insertion Sort"<<endl;
     cout<<"Original Array: ";
     print(list);
     insertion(list);

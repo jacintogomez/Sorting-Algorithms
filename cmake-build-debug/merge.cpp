@@ -82,13 +82,17 @@ void merge(vector<int>& ar,int begin,int end,int step){
     mergesort(ar,begin,mid,end);
     print(ar);
     printsortedportion(countspaces(ar,begin),countmiddleunderscores(ar,begin,end));
-    cout<<" this call is "<<step<<" level(s) deep"<<endl;
-    //cout<<" begin "<<begin<<" mid "<<mid<<" end "<<end<<endl;
+    if(step) {
+        cout << " this merge is " << step << " level(s) deep" << endl;
+    }else{
+        cout<<"this is the final merge"<<endl;
+    }
 }
 
 int main(){
-    vector<int> list={999,104,2,1024,16};
+    vector<int> list={9,88,2000,100,43,546,2,32};
     //vector<int> list={8,7,6,5,4,3,2,1};
+    cout<<"Merge Sort"<<endl;
     cout<<"Original Array: ";
     print(list);
     merge(list,0,list.size()-1,0);

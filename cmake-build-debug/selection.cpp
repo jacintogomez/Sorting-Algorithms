@@ -45,7 +45,7 @@ void selection(vector<int> ar){
         print(ar);
         printsortedportion(countspaces(ar,i));
         if(ar[min]!=ar[i]){
-            cout<<" the next minimum was "<<ar[i]<<" and was swapped with "<<ar[min]<<endl;
+            cout<<" the next minimum selected was "<<ar[i]<<" and was swapped with "<<ar[min]<<endl;
         }else{
             cout<<" "<<ar[min]<<" was the next smallest, so no swap occurred"<<endl;
         }
@@ -55,8 +55,9 @@ void selection(vector<int> ar){
 }
 
 int main(){
-    vector<int> list={999,104,2,1024,16};
+    vector<int> list={9,88,2000,100,43,546,2,32};
     //vector<int> list={5,4,3,2,1};
+    cout<<"Selection Sort"<<endl;
     cout<<"Original Array: ";
     print(list);
     selection(list);

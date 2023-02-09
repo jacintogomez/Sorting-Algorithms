@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/Users/jacintogomez/Downloads/bridgeprogs/cmake-build-debug/merge.cpp
+/Users/jacintogomez/Downloads/bridgeprogs/cmake-build-debug/bubble.cpp
 iostream
 -
 string
