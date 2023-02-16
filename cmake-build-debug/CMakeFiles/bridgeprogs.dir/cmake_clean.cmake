@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/bridgeprogs.dir/bubble.cpp.o"
+  "CMakeFiles/bridgeprogs.dir/heap.cpp.o"
   "bridgeprogs"
   "bridgeprogs.pdb"
 )

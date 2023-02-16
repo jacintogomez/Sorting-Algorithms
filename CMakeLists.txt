@@ -3,4 +3,4 @@ project(bridgeprogs)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(bridgeprogs bubble.cpp)
+add_executable(bridgeprogs heap.cpp)

@@ -129,29 +129,29 @@ bridgeprogs/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/bridgeprogs.dir/build.make CMakeFiles/bridgeprogs.dir/build
 .PHONY : bridgeprogs/fast
 
-bubble.o: bubble.cpp.o
-.PHONY : bubble.o
+heap.o: heap.cpp.o
+.PHONY : heap.o
 
 # target to build an object file
-bubble.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/bridgeprogs.dir/build.make CMakeFiles/bridgeprogs.dir/bubble.cpp.o
-.PHONY : bubble.cpp.o
+heap.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bridgeprogs.dir/build.make CMakeFiles/bridgeprogs.dir/heap.cpp.o
+.PHONY : heap.cpp.o
 
-bubble.i: bubble.cpp.i
-.PHONY : bubble.i
+heap.i: heap.cpp.i
+.PHONY : heap.i
 
 # target to preprocess a source file
-bubble.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/bridgeprogs.dir/build.make CMakeFiles/bridgeprogs.dir/bubble.cpp.i
-.PHONY : bubble.cpp.i
+heap.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bridgeprogs.dir/build.make CMakeFiles/bridgeprogs.dir/heap.cpp.i
+.PHONY : heap.cpp.i
 
-bubble.s: bubble.cpp.s
-.PHONY : bubble.s
+heap.s: heap.cpp.s
+.PHONY : heap.s
 
 # target to generate assembly for a file
-bubble.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/bridgeprogs.dir/build.make CMakeFiles/bridgeprogs.dir/bubble.cpp.s
-.PHONY : bubble.cpp.s
+heap.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bridgeprogs.dir/build.make CMakeFiles/bridgeprogs.dir/heap.cpp.s
+.PHONY : heap.cpp.s
 
 # Help Target
 help:
@@ -162,9 +162,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... bridgeprogs"
-	@echo "... bubble.o"
-	@echo "... bubble.i"
-	@echo "... bubble.s"
+	@echo "... heap.o"
+	@echo "... heap.i"
+	@echo "... heap.s"
 .PHONY : help
 
 
