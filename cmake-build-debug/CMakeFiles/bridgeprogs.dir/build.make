@@ -66,27 +66,27 @@ include CMakeFiles/bridgeprogs.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/bridgeprogs.dir/flags.make
 
-CMakeFiles/bridgeprogs.dir/quick.cpp.o: CMakeFiles/bridgeprogs.dir/flags.make
-CMakeFiles/bridgeprogs.dir/quick.cpp.o: quick.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jacintogomez/Downloads/bridgeprogs/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/bridgeprogs.dir/quick.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/bridgeprogs.dir/quick.cpp.o -c /Users/jacintogomez/Downloads/bridgeprogs/cmake-build-debug/quick.cpp
+CMakeFiles/bridgeprogs.dir/algos.cpp.o: CMakeFiles/bridgeprogs.dir/flags.make
+CMakeFiles/bridgeprogs.dir/algos.cpp.o: algos.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jacintogomez/Downloads/bridgeprogs/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/bridgeprogs.dir/algos.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/bridgeprogs.dir/algos.cpp.o -c /Users/jacintogomez/Downloads/bridgeprogs/cmake-build-debug/algos.cpp
 
-CMakeFiles/bridgeprogs.dir/quick.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/bridgeprogs.dir/quick.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jacintogomez/Downloads/bridgeprogs/cmake-build-debug/quick.cpp > CMakeFiles/bridgeprogs.dir/quick.cpp.i
+CMakeFiles/bridgeprogs.dir/algos.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/bridgeprogs.dir/algos.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jacintogomez/Downloads/bridgeprogs/cmake-build-debug/algos.cpp > CMakeFiles/bridgeprogs.dir/algos.cpp.i
 
-CMakeFiles/bridgeprogs.dir/quick.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/bridgeprogs.dir/quick.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jacintogomez/Downloads/bridgeprogs/cmake-build-debug/quick.cpp -o CMakeFiles/bridgeprogs.dir/quick.cpp.s
+CMakeFiles/bridgeprogs.dir/algos.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/bridgeprogs.dir/algos.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jacintogomez/Downloads/bridgeprogs/cmake-build-debug/algos.cpp -o CMakeFiles/bridgeprogs.dir/algos.cpp.s
 
 # Object files for target bridgeprogs
 bridgeprogs_OBJECTS = \
-"CMakeFiles/bridgeprogs.dir/quick.cpp.o"
+"CMakeFiles/bridgeprogs.dir/algos.cpp.o"
 
 # External object files for target bridgeprogs
 bridgeprogs_EXTERNAL_OBJECTS =
 
-bridgeprogs: CMakeFiles/bridgeprogs.dir/quick.cpp.o
+bridgeprogs: CMakeFiles/bridgeprogs.dir/algos.cpp.o
 bridgeprogs: CMakeFiles/bridgeprogs.dir/build.make
 bridgeprogs: CMakeFiles/bridgeprogs.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/jacintogomez/Downloads/bridgeprogs/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable bridgeprogs"

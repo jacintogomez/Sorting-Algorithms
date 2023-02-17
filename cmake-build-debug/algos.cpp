@@ -69,6 +69,16 @@ int counttotalspaces(vector<int> ve){
     return count;
 }
 
+int counttotalspacesquick(vector<int> ve){
+    int count=0;
+    for(int i=0;i<ve.size();i++){
+        string element=to_string(ve[i]);
+        count+=element.size();
+    }
+    count+=ve.size()-1+2;//-1 because there will be 1 less comma than elements, +2 for the 2 brackets
+    return count;
+}
+
 void printsortedportionbubble(int index,vector<int> ve){
     int totalchars=counttotalspaces(ve);
     int spacestoindex=countspacesbubble(ve,index);
@@ -207,6 +217,119 @@ void insertion(vector<int> ar){
     print(ar);
 }
 
+void printsortedportionquick(int index,vector<int> ve){
+    int totalchars=counttotalspacesquick(ve)-2; //-2 to subtract the brackets
+    int spacestoindex=countspacesbubble(ve,index)-2; //-2 to subtract the two |'s
+    int spacesuptopivot=countspacesbubble(ve,index+1)-2;
+    int pivotspaces=spacesuptopivot-spacestoindex-1;
+    int afterpiv=totalchars-spacesuptopivot-1;
+    if(index!=0){cout<<"|";}
+    else{spacestoindex++;}
+    for(int i=1;i<=spacestoindex;i++){
+        cout<<"_";
+    }
+    cout<<"|";
+    for(int i=1;i<=pivotspaces;i++){
+        cout<<" ";
+    }
+    cout<<"|";
+    for(int i=1;i<=afterpiv;i++){
+        cout<<"_";
+    }
+    if(index!=ve.size()-1){cout<<"|";}
+    cout<<" <-pivot is "<<ve[index]<<"... ";
+}
+
+int partition(vector<int>& ar,int low,int high){
+    int pivot=ar[high];
+    int i=low-1;
+    for(int j=low;j<=high-1;j++){
+        if(ar[j]<pivot){
+            i++;
+            int temp=ar[j];
+            ar[j]=ar[i];
+            ar[i]=temp;
+        }
+    }
+    int other=ar[i+1];
+    ar[i+1]=ar[high];
+    ar[high]=other;
+    print(ar);
+    printsortedportionquick(i+1,ar);
+    cout<<"numbers greater than "<<pivot<<" are placed on the left, and less than "<<pivot<<" are on the right"<<endl;
+    return i+1;
+}
+
+void quick(vector<int>& ar,int low,int high){
+    if(low<high){
+        int pivot=partition(ar,low,high);
+        quick(ar,low,pivot-1);
+        quick(ar,pivot+1,high);
+    }
+}
+
+void heapify(vector<int>& ar,int n,int parent){
+    int max=parent;
+    int left=2*parent+1;
+    int right=2*parent+2;
+    if(left<n&&ar[left]>ar[max]){max=left;}
+    if(right<n&&ar[right]>ar[max]){max=right;}
+    if(max!=parent){
+        int temp=ar[parent];
+        ar[parent]=ar[max];
+        ar[max]=temp;
+        heapify(ar,n,max);
+    }
+}
+
+void heap(vector<int>& ar){
+    int n=ar.size();
+    for(int i=n/2-1;i>=0;i--){heapify(ar,n,i);}
+    for(int j=n-1;j>=0;j--){
+        int temp=ar[0];
+        ar[0]=ar[j];
+        ar[j]=temp;
+        heapify(ar,j,0);
+        print(ar);
+        printsortedportionbubble(j,ar);
+        cout<<" the max element "<<ar[j]<<" was pushed to the root of the heap and then removed"<<endl;
+    }
+}
+
+int getmax(vector<int> ar){
+    int mx=ar[0];
+    for(int i:ar){
+        if(i>mx){
+            mx=i;
+        }
+    }
+    return mx;
+}
+
+void countsort(vector<int>& ar,int exp){
+    int n=ar.size();
+    vector<int> output(n,0);
+    vector<int> count(10,0);
+    for(int i=0;i<n;i++){count[(ar[i]/exp)%10]++;}
+    for(int i=1;i<10;i++){count[i]+=count[i-1];}
+    for(int i=n-1;i>=0;i--){
+        output[count[(ar[i]/exp)%10]-1]=ar[i];
+        count[(ar[i]/exp)%10]--;
+    }
+    for(int i=0;i<n;i++){ar[i]=output[i];}
+}
+
+void radix(vector<int>& ar){
+    int m=getmax(ar);
+    int e=1;
+    for(int exp=1;m/exp>0;exp*=10){
+        countsort(ar,exp);
+        print(ar);
+        cout<<"---> all numbers lower than "<<pow(10,e)<<" are now sorted with respect to each other"<<endl;
+        e++;
+    }
+}
+
 vector<int> vecmaker(string in){
     vector<int> out={};
     int index=0;
@@ -237,6 +360,9 @@ int main(){
     cout<<"2. Insertion Sort"<<endl;
     cout<<"3. Selection Sort"<<endl;
     cout<<"4. Bubble Sort"<<endl;
+    cout<<"5. Quick Sort"<<endl;
+    cout<<"6. Heap Sort"<<endl;
+    cout<<"7. Radix Sort"<<endl;
     cin>>choice;
     cout<<"Original Array: ";
     print(list);
@@ -268,6 +394,27 @@ int main(){
             cout<<"Time Complexity: O(n^2), Omega(n)"<<endl;
             cout<<"Space Complexity: O(1)"<<endl;
             bubble(list);
+            break;
+        case 5:
+            cout<<"Quick Sort:"<<endl;
+            cout<<"pick a random element and place all numbers greater than it on one side, and less than on the other; repeat this recursively for the two halves"<<endl;
+            cout<<"Time Complexity: O(n^2), Omega(nlog(n))"<<endl;
+            cout<<"Space Complexity: O(nlog(n))"<<endl;
+            quick(list,0,list.size()-1);
+            break;
+        case 6:
+            cout<<"Heap Sort:"<<endl;
+            cout<<"Treat all elements as a heap (tree) and recursively move the max element to the root and remove it"<<endl;
+            cout<<"Time Complexity: Theta(nlog(n))"<<endl;
+            cout<<"Space Complexity: O(1)"<<endl;
+            heap(list);
+            break;
+        case 7:
+            cout<<"Radix Sort:"<<endl;
+            cout<<"compare side by side elements and swap if the left one is larger; with each trial of this the next largest element 'bubbles' to the top"<<endl;
+            cout<<"Time Complexity: Theta(n*k)"<<endl;
+            cout<<"Space Complexity: O(n+k)"<<endl;
+            radix(list);
             break;
         default:
             cout<<"No selection made/Invalid selection"<<endl;

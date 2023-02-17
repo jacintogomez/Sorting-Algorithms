@@ -40,7 +40,7 @@ void radix(vector<int>& ar){
     for(int exp=1;m/exp>0;exp*=10){
         countsort(ar,exp);
         print(ar);
-        cout<<" all numbers lower than "<<pow(10,e)<<" are now sorted with respect to each other"<<endl;
+        cout<<"---> all numbers lower than "<<pow(10,e)<<" are now sorted with respect to each other"<<endl;
         e++;
     }
 }

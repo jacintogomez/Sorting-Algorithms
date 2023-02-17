@@ -80,7 +80,7 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/jacintogomez/Downloads/bridgeprogs/cmake-build-debug/quick.cpp">
+		<Unit filename="/Users/jacintogomez/Downloads/bridgeprogs/cmake-build-debug/algos.cpp">
 			<Option target="bridgeprogs"/>
 		</Unit>
 		<Unit filename="/Users/jacintogomez/Downloads/bridgeprogs/CMakeLists.txt">

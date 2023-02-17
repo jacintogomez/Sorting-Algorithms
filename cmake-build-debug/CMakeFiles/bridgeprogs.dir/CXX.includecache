@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/Users/jacintogomez/Downloads/bridgeprogs/cmake-build-debug/quick.cpp
+/Users/jacintogomez/Downloads/bridgeprogs/cmake-build-debug/algos.cpp
 iostream
 -
 string

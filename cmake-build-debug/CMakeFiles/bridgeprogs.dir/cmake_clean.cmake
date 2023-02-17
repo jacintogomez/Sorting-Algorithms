@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/bridgeprogs.dir/quick.cpp.o"
+  "CMakeFiles/bridgeprogs.dir/algos.cpp.o"
   "bridgeprogs"
   "bridgeprogs.pdb"
 )
