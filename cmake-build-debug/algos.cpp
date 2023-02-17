@@ -330,25 +330,23 @@ void radix(vector<int>& ar){
     }
 }
 
-void validateinput(string in){
-    getline(cin,in);
-    if(in.size()==0){
-        cout<<"Cannot enter empty array";
-        exit(1);
-    }
-}
-
 vector<int> vecmaker(string in){
     vector<int> out={};
     int index=0;
     int length=0;
+    string potentialdigit;
     if(in.size()==0){
         cout<<"Error: cannot enter empty array";
         exit(1);
     }
     for(int i=0;i<in.size();i++){
         if(in[i]==' '){
-            out.push_back(stoi(in.substr(index,length)));
+            potentialdigit=in.substr(index,length);
+            if(!isdigit(potentialdigit[0])){
+                cout<<"Error: improper formatting, try again please";
+                exit(1);
+            }
+            out.push_back(stoi(potentialdigit));
             index=i+1;
             length=0;
         }else{
