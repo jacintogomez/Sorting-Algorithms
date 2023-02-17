@@ -12,50 +12,44 @@ void print(vector<int> ar){
 }
 
 void printsortedportion(int index){
-    cout<<"|";
-    for(int i=0;i<index;i++){
-        cout<<"_";
-    }
-    cout<<"| <-sorted portion... ";
 }
 
 int countspaces(vector<int> ve,int index){
-    int count=0;
-    for(int i=0;i<=index;i++){
-        string element=to_string(ve[i]);
-        count+=element.size();
-    }
-    count+=index;
-    return count;
 }
 
-void insertion(vector<int> ar){
-    for(int i=1;i<ar.size();i++){
-        int key=ar[i];
-        int j=i-1;
-        while(j>=0&&ar[j]>key){
-            ar[j+1]=ar[j];
-            j--;
-        }
-        int temp=ar[j+1];
-        ar[j+1]=key;
-        print(ar);
-        printsortedportion(countspaces(ar,i));
-        if(key!=temp) {
-            cout << key << " was placed before " << temp << endl;
-        }else{
-            cout<<"no substitutions were necessary"<<endl;
+int partition(vector<int>& ar,int low,int high){
+    int pivot=ar[high];
+    int i=low-1;
+    for(int j=low;j<=high-1;j++){
+        if(ar[j]<pivot){
+            i++;
+            int temp=ar[j];
+            ar[j]=ar[i];
+            ar[i]=temp;
         }
     }
-    cout<<"Final Sorted Array: ";
-    print(ar);
+    int other=ar[i+1];
+    ar[i+1]=ar[high];
+    ar[high]=other;
+    return i+1;
+}
+
+void quick(vector<int>& ar,int low,int high){
+    if(low<high){
+        int pivot=partition(ar,low,high);
+        quick(ar,low,pivot-1);
+        quick(ar,pivot+1,high);
+    }
 }
 
 int main(){
-    vector<int> list={999,104,2,1024,16};
-    //vector<int> list={5,4,3,2,1};
+    //vector<int> list={999,104,2,1024,16};
+    vector<int> list={8,2,5,6,4,3,7,1};
+    cout<<"Quick Sort"<<endl;
     cout<<"Original Array: ";
     print(list);
-    insertion(list);
+    quick(list,0,list.size()-1);
+    cout<<"Final Sorted Array: ";
+    print(list);
     return 0;
 }

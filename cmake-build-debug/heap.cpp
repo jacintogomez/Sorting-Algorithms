@@ -47,7 +47,7 @@ void heap(vector<int>& ar){
 
 int main(){
     //vector<int> list={999,104,2,1024,16};
-    vector<int> list={5,4,3,2,1};
+    vector<int> list={8,2,5,6,4,3,7,1};
     //vector<int> list={9,88,2000,100,43,546,2,32};
     cout<<"Heap Sort"<<endl;
     cout<<"Original Array: ";
