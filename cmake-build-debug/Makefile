@@ -129,29 +129,29 @@ bridgeprogs/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/bridgeprogs.dir/build.make CMakeFiles/bridgeprogs.dir/build
 .PHONY : bridgeprogs/fast
 
-radix.o: radix.cpp.o
-.PHONY : radix.o
+quick.o: quick.cpp.o
+.PHONY : quick.o
 
 # target to build an object file
-radix.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/bridgeprogs.dir/build.make CMakeFiles/bridgeprogs.dir/radix.cpp.o
-.PHONY : radix.cpp.o
+quick.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bridgeprogs.dir/build.make CMakeFiles/bridgeprogs.dir/quick.cpp.o
+.PHONY : quick.cpp.o
 
-radix.i: radix.cpp.i
-.PHONY : radix.i
+quick.i: quick.cpp.i
+.PHONY : quick.i
 
 # target to preprocess a source file
-radix.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/bridgeprogs.dir/build.make CMakeFiles/bridgeprogs.dir/radix.cpp.i
-.PHONY : radix.cpp.i
+quick.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bridgeprogs.dir/build.make CMakeFiles/bridgeprogs.dir/quick.cpp.i
+.PHONY : quick.cpp.i
 
-radix.s: radix.cpp.s
-.PHONY : radix.s
+quick.s: quick.cpp.s
+.PHONY : quick.s
 
 # target to generate assembly for a file
-radix.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/bridgeprogs.dir/build.make CMakeFiles/bridgeprogs.dir/radix.cpp.s
-.PHONY : radix.cpp.s
+quick.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bridgeprogs.dir/build.make CMakeFiles/bridgeprogs.dir/quick.cpp.s
+.PHONY : quick.cpp.s
 
 # Help Target
 help:
@@ -162,9 +162,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... bridgeprogs"
-	@echo "... radix.o"
-	@echo "... radix.i"
-	@echo "... radix.s"
+	@echo "... quick.o"
+	@echo "... quick.i"
+	@echo "... quick.s"
 .PHONY : help
 
 
