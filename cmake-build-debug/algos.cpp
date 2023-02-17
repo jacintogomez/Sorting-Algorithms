@@ -330,10 +330,22 @@ void radix(vector<int>& ar){
     }
 }
 
+void validateinput(string in){
+    getline(cin,in);
+    if(in.size()==0){
+        cout<<"Cannot enter empty array";
+        exit(1);
+    }
+}
+
 vector<int> vecmaker(string in){
     vector<int> out={};
     int index=0;
     int length=0;
+    if(in.size()==0){
+        cout<<"Error: cannot enter empty array";
+        exit(1);
+    }
     for(int i=0;i<in.size();i++){
         if(in[i]==' '){
             out.push_back(stoi(in.substr(index,length)));
@@ -347,15 +359,7 @@ vector<int> vecmaker(string in){
     return out;
 }
 
-int main(){
-    string ar;
-    int choice=0;
-    cout<<"Choose an array and enter without brackets or commas, separated by spaces"<<endl;
-    cout<<"Example: [1,2,3] should be entered as 1 2 3"<<endl;
-    cout<<"Enter your array: ";
-    getline(cin,ar);
-    vector<int> list=vecmaker(ar);
-    cout<<"Next, choose a sorting algorithm from the options below by entering the corresponding number:"<<endl;
+void displayoptions(){
     cout<<"1. Merge Sort"<<endl;
     cout<<"2. Insertion Sort"<<endl;
     cout<<"3. Selection Sort"<<endl;
@@ -363,9 +367,15 @@ int main(){
     cout<<"5. Quick Sort"<<endl;
     cout<<"6. Heap Sort"<<endl;
     cout<<"7. Radix Sort"<<endl;
-    cin>>choice;
-    cout<<"Original Array: ";
-    print(list);
+}
+
+void afteroptions(){
+    cout<<"1. Choose new algorithm for same array"<<endl;
+    cout<<"2. Enter new array"<<endl;
+    cout<<"3. Exit"<<endl;
+}
+
+void switchloop1(int choice,vector<int> list){
     switch(choice){
         case 1:
             cout<<"Merge Sort: "<<endl;
@@ -419,5 +429,57 @@ int main(){
         default:
             cout<<"No selection made/Invalid selection"<<endl;
     }
+}
+
+void switchloop2(int choice,vector<int>& list){
+    string ar;
+    int newchoice;
+    switch(choice){
+        case 1:
+            displayoptions();
+            cin>>newchoice;
+            switchloop1(newchoice,list);
+            break;
+        case 2:
+            cout<<"Pick a new array and type in the same format as before"<<endl;
+            cout<<"Example: [3,1,2] should be entered as 3 1 2"<<endl;
+            cout<<"Enter your array: ";
+            //validateinput(ar);
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            getline(cin,ar);
+            list=vecmaker(ar);
+            displayoptions();
+            cin>>newchoice;
+            switchloop1(newchoice,list);
+            break;
+        case 3:
+            cout<<"Hope this was helpful :)";
+            break;
+        default:
+            cout<<"Invalid selection"<<endl;
+    }
+}
+
+int main(){
+    string ar;
+    int choice=0;
+    cout<<"Choose an array and enter without brackets or commas, separated by spaces"<<endl;
+    cout<<"Example: [3,1,2] should be entered as 3 1 2"<<endl;
+    cout<<"This array will be sorted in increasing order"<<endl;
+    cout<<"Enter your array: ";
+    getline(cin,ar);
+    vector<int> list=vecmaker(ar);
+    cout<<"Next, choose a sorting algorithm from the options below by entering the corresponding number:"<<endl;
+    displayoptions();
+    cin>>choice;
+    cout<<"Original Array: ";
+    print(list);
+    switchloop1(choice,list);
+    do{
+        afteroptions();
+        cin>>choice;
+        switchloop2(choice,list);
+    }while(choice!=3);
     return 0;
 }
