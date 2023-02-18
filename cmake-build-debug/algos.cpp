@@ -1,3 +1,5 @@
+//Created by Jacinto Gomez
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -163,7 +165,7 @@ void bubble(vector<int> ar){
         if(swap) {
             cout << " " << ar[i] << " was the next largest, and was 'bubbled' up to the end" << endl;
         }else{
-            cout<<" next largest element "<<ar[i]<<" is already in sorted position"<<endl;
+            cout<<" next largest element "<<ar[i]<<" was already in sorted position"<<endl;
         }
     }
     cout<<"Final Sorted Array: ";
@@ -186,9 +188,9 @@ void selection(vector<int> ar){
         print(ar);
         printsortedportion(countspaces(ar,i));
         if(ar[min]!=ar[i]){
-            cout<<" the next minimum was "<<ar[i]<<" and was swapped with "<<ar[min]<<endl;
+            cout<<" the next largest was "<<ar[i]<<" and was swapped with "<<ar[min]<<endl;
         }else{
-            cout<<" "<<ar[min]<<" was the next smallest, so no swap occurred"<<endl;
+            cout<<" "<<ar[min]<<" happened to be the next smallest, so no swap occurred"<<endl;
         }
     }
     cout<<"Final Sorted Array: ";
@@ -208,9 +210,9 @@ void insertion(vector<int> ar){
         print(ar);
         printsortedportion(countspaces(ar,i));
         if(key!=temp) {
-            cout << key << " was inserted before " << temp << endl;
+            cout << key << " was the next element in line, and was inserted before " << temp << endl;
         }else{
-            cout<<"no insertions were necessary"<<endl;
+            cout<<"next element was the largest so far, no insertions were necessary"<<endl;
         }
     }
     cout<<"Final Sorted Array: ";
@@ -256,7 +258,7 @@ int partition(vector<int>& ar,int low,int high){
     ar[high]=other;
     print(ar);
     printsortedportionquick(i+1,ar);
-    cout<<"numbers greater than "<<pivot<<" are placed on the left, and less than "<<pivot<<" are on the right"<<endl;
+    cout<<"numbers greater than "<<pivot<<" are placed to the left of it, and ones smaller than it on the right"<<endl;
     return i+1;
 }
 
@@ -412,14 +414,14 @@ void switchloop1(int choice,vector<int> list){
             break;
         case 6:
             cout<<"Heap Sort:"<<endl;
-            cout<<"Treat all elements as a heap (tree) and recursively move the max element to the root and remove it"<<endl;
+            cout<<"treat all elements as a heap (tree) and recursively move the max element to the root and remove it"<<endl;
             cout<<"Time Complexity: Theta(nlog(n))"<<endl;
             cout<<"Space Complexity: O(1)"<<endl;
             heap(list);
             break;
         case 7:
             cout<<"Radix Sort:"<<endl;
-            cout<<"compare side by side elements and swap if the left one is larger; with each trial of this the next largest element 'bubbles' to the top"<<endl;
+            cout<<"sort all elements by the digit in the 1's place, then by the digit in the 10's place.. continue through the max digit"<<endl;
             cout<<"Time Complexity: Theta(n*k)"<<endl;
             cout<<"Space Complexity: O(n+k)"<<endl;
             radix(list);
