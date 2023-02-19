@@ -285,8 +285,13 @@ void heapify(vector<int>& ar,int n,int parent){
 }
 
 void heap(vector<int>& ar){
+    print(ar);
+    cout<<"----> call heapify to turn array into binary tree"<<endl;
     int n=ar.size();
     for(int i=n/2-1;i>=0;i--){heapify(ar,n,i);}
+    print(ar);
+    cout<<"----> keep calling heapify each time a max element is taken away"<<endl;
+    int prevfront=-1;
     for(int j=n-1;j>=0;j--){
         int temp=ar[0];
         ar[0]=ar[j];
@@ -294,7 +299,12 @@ void heap(vector<int>& ar){
         heapify(ar,j,0);
         print(ar);
         printsortedportionbubble(j,ar);
-        cout<<" the max element "<<ar[j]<<" was pushed to the root of the heap and then removed"<<endl;
+        if(prevfront==ar[j]){
+            cout<<" next max "<<ar[j]<<" was already at heap root, then removed to the back"<<endl;
+        }else{
+            cout<<" the max element "<<ar[j]<<" was pushed to the root of the heap and then removed"<<endl;
+        }
+        prevfront=ar[0];
     }
 }
 
