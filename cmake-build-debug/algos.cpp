@@ -475,8 +475,9 @@ int main(){
     string ar;
     int choice=0;
     cout<<"This program will trace the sorting of an array with whatever sorting algorithm you select"<<endl;
-    cout<<"Note: the output will only appear properly In a compiler that displays all output letters and symbols \nin fixed sized spaces. For instance, if your compiler displays lllll and WWWWW as the same length, then it is good\nfor it; if it displays them as drastically different, it is not"<<endl;
-    cout<<"This program will also not work for negative numbers or inputs other than int"<<endl;
+    cout<<"Note that: "<<endl;
+    cout<<"\t1. The output will only appear properly in a compiler that displays all output letters and symbols in fixed sized spaces. For instance, if your compiler displays lllll and WWWWW as the same length, then it is good for it; if they appear drastically different it is not"<<endl;
+    cout<<"\t2. This program will also not work for negative numbers or inputs other than int"<<endl;
     cout<<"Choose an array and enter without brackets or commas, separated by spaces"<<endl;
     cout<<"Example: [3,1,2] should be entered as 3 1 2"<<endl;
     cout<<"This array will be sorted in increasing order"<<endl;
