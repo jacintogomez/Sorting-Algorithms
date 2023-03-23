@@ -163,7 +163,7 @@ void bubble(vector<int> ar){
         print(ar);
         printsortedportionbubble(i,ar);
         if(swap) {
-            cout << " " << ar[i] << " was the next largest, and was 'bubbled' up to the end" << endl;
+            cout << " " << ar[i] << " was the next largest, and was moved up to the end" << endl;
         }else{
             cout<<" next largest element "<<ar[i]<<" was already in sorted position"<<endl;
         }
@@ -370,13 +370,16 @@ vector<int> vecmaker(string in){
 }
 
 void displayoptions(){
-    cout<<"1. Merge Sort"<<endl;
+    cout<<"1. Mergesort"<<endl;
     cout<<"2. Insertion Sort"<<endl;
     cout<<"3. Selection Sort"<<endl;
     cout<<"4. Bubble Sort"<<endl;
-    cout<<"5. Quick Sort"<<endl;
-    cout<<"6. Heap Sort"<<endl;
+    cout<<"5. Quicksort"<<endl;
+    cout<<"6. Heapsort"<<endl;
     cout<<"7. Radix Sort"<<endl;
+//    cout<<"8. Counting Sort"<<endl;
+//    cout<<"9. Bucket Sort"<<endl;
+//    cout<<"or press 0 for algorithm info"<<endl;
 }
 
 void afteroptions(){
@@ -385,10 +388,47 @@ void afteroptions(){
     cout<<"3. Exit"<<endl;
 }
 
+void displayalgoinfo(){
+    cout<<"Mergesort: "<<endl;
+    cout<<"Recursive! This will n combine in order"<<endl;
+    cout<<"Time Complexity: Theta(nlog(n))"<<endl;
+    cout<<"Space Complexity: O(n)"<<endl;
+    cout<<"------------------------"<<endl;
+    cout<<"Insertion Sort: "<<endl;
+    cout<<"insert the next element into its proper spot in the sorted part of the array"<<endl;
+    cout<<"Time Complexity: O(n^2), Omega(n)"<<endl;
+    cout<<"Space Complexity: O(1)"<<endl;
+    cout<<"------------------------"<<endl;
+    cout<<"Selection Sort:"<<endl;
+    cout<<"select the next smallest element from the unsorted part of the array and swap"<<endl;
+    cout<<"Time Complexity: Theta(n^2)"<<endl;
+    cout<<"Space Complexity: O(1)"<<endl;
+    cout<<"------------------------"<<endl;
+    cout<<"Bubble Sort:"<<endl;
+    cout<<"compare side by side elements and swap if the left one is larger; with each trial of this the next largest element 'bubbles' to the top"<<endl;
+    cout<<"Time Complexity: O(n^2), Omega(n)"<<endl;
+    cout<<"Space Complexity: O(1)"<<endl;
+    cout<<"------------------------"<<endl;
+    cout<<"Quicksort:"<<endl;
+    cout<<"pick a random element and place all numbers greater than it on one side, and less than on the other; repeat this recursively for the two halves"<<endl;
+    cout<<"Time Complexity: O(n^2), Omega(nlog(n))"<<endl;
+    cout<<"Space Complexity: O(nlog(n))"<<endl;
+    cout<<"------------------------"<<endl;
+    cout<<"Heapsort:"<<endl;
+    cout<<"treat all elements as a heap (tree) and recursively move the max element to the root and remove it"<<endl;
+    cout<<"Time Complexity: Theta(nlog(n))"<<endl;
+    cout<<"Space Complexity: O(1)"<<endl;
+    cout<<"------------------------"<<endl;
+    cout<<"Radix Sort:"<<endl;
+    cout<<"sort all elements by the digit in the 1's place, then by the digit in the 10's place.. continue through the max digit"<<endl;
+    cout<<"Time Complexity: Theta(d(n*k)) d=max # of digits, k=number of possible values for each digit (here is 10 for decimal #s)"<<endl;
+    cout<<"Space Complexity: O(n+k)"<<endl;
+}
+
 void switchloop1(int choice,vector<int> list){
     switch(choice){
         case 1:
-            cout<<"Merge Sort: "<<endl;
+            cout<<"Mergesort: "<<endl;
             cout<<"recursively break the array in half until sub-array lengths are 1, then combine in order"<<endl;
             cout<<"Time Complexity: Theta(nlog(n))"<<endl;
             cout<<"Space Complexity: O(n)"<<endl;
@@ -416,14 +456,14 @@ void switchloop1(int choice,vector<int> list){
             bubble(list);
             break;
         case 5:
-            cout<<"Quick Sort:"<<endl;
+            cout<<"Quicksort:"<<endl;
             cout<<"pick a random element and place all numbers greater than it on one side, and less than on the other; repeat this recursively for the two halves"<<endl;
             cout<<"Time Complexity: O(n^2), Omega(nlog(n))"<<endl;
             cout<<"Space Complexity: O(nlog(n))"<<endl;
             quick(list,0,list.size()-1);
             break;
         case 6:
-            cout<<"Heap Sort:"<<endl;
+            cout<<"Heapsort:"<<endl;
             cout<<"treat all elements as a heap (tree) and recursively move the max element to the root and remove it"<<endl;
             cout<<"Time Complexity: Theta(nlog(n))"<<endl;
             cout<<"Space Complexity: O(1)"<<endl;
@@ -476,11 +516,13 @@ int main(){
     int choice=0;
     cout<<"This program will trace the sorting of an array with whatever sorting algorithm you select"<<endl;
     cout<<"Note that: "<<endl;
-    cout<<"\t1. The output will only appear properly in a compiler that displays all output letters and symbols in fixed sized spaces. For instance, if your compiler displays lllll and WWWWW as the same length, then it is good for it; if they appear drastically different it is not"<<endl;
+    cout<<"\t1. The output will only appear properly in a compiler that displays all output letters and symbols in fixed sized spaces;"
+          "\n\t   For instance, if your compiler displays iiiii and WWWWW as the same length, then it is good for it; if they appear drastically different"
+          "\n\t   like in a word doc or the Google search bar, it is not"<<endl;
     cout<<"\t2. This program will also not work for negative numbers or inputs other than int"<<endl;
-    cout<<"Choose an array and enter without brackets or commas, separated by spaces"<<endl;
+    cout<<"\t3. The array will be sorted in increasing order"<<endl;
+    cout<<"Choose an array and enter without brackets or commas, and separated by spaces"<<endl;
     cout<<"Example: [3,1,2] should be entered as 3 1 2"<<endl;
-    cout<<"This array will be sorted in increasing order"<<endl;
     cout<<"Enter your array: ";
     getline(cin,ar);
     vector<int> list=vecmaker(ar);
