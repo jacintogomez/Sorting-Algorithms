@@ -1,4 +1,6 @@
 //Created by Jacinto Gomez
+//NYU Tandon School of Engineering
+//Cornell College of Engineering
 
 #include <iostream>
 #include <string>
@@ -335,6 +337,38 @@ void radix(vector<int>& ar){
     }
 }
 
+void counting(vector<int>& ar){
+    int max=0,realmax=getmax(ar);
+    cout<<"This requires a specified range; input the max value: ";
+    cin>>max;
+    if(max<realmax){
+        cout<<"Range must be at least as large as the max array value..."
+              "\n...your input range will be switched to the max int found in the array"<<endl;
+        max=realmax;
+    }
+    int n=ar.size();
+    vector<int> output(n,0);
+    cout<<"output array initialized as ---> ";
+    print(output);
+    vector<int> count(max+1,0);
+    cout<<"count array initialized as ---> ";
+    print(count);
+    for(int i=0;i<n;i++){count[ar[i]]++;}
+    cout<<"count updated with frequency of each index ---> ";
+    print(count);
+    for(int j=1;j<=max;j++){count[j]+=count[j-1];}
+    cout<<"count updated with index of each index --> ";
+    print(count);
+    for(int k=n-1;k>=0;k--){
+        cout<<"placing "<<ar[k]<<" into output array"<<endl;
+        output[count[ar[k]]-1]=ar[k];
+        count[ar[k]]--;
+        cout<<"output is now --> ";
+        print(output);
+    }
+    ar=output;
+}
+
 vector<int> vecmaker(string in){
     vector<int> out={};
     int index=0;
@@ -493,8 +527,7 @@ void switchloop1(int choice,vector<int> list){
             break;
         case 7:
             cout<<"Counting Sort"<<endl;
-            cout<<"Not yet done!"<<endl;
-            //countingsort(list);
+            counting(list);
             break;
         case 8:
             cout<<"Radix Sort:"<<endl;
