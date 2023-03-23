@@ -382,6 +382,7 @@ void afteroptions(){
 }
 
 void displayalgoinfo(){
+    cout<<"------------------------"<<endl;
     cout<<"Mergesort: "<<endl;
     cout<<"Recursive! This breaks the array into 2 smaller arrays until the base case of an array of size 1 is reached,"
         "\nthen merges these auxiliary arrays in sorted order. This ends up being simple since each auxiliary array"
@@ -409,7 +410,7 @@ void displayalgoinfo(){
     cout<<"Quicksort:"<<endl;
     cout<<"Recursive! For each call, a random element called the pivot is chosen and all elements less than it are"
         "\nplaced to the left, and all elements greater are placed to the right. It is then recursively called on those two halves."
-        "\nA function called partition is used to select the pivot either randomly, or as a fixed array index."<<endl;
+        "\nA function called partition is used to select the pivot either randomly, or as a fixed array index (here it is fixed, the last index)."<<endl;
     cout<<"Time Complexity: Omega(nlog(n)), Theta(nlog(n)), O(n^2)"<<endl;
     cout<<"Space Complexity: O(nlog(n))"<<endl;
     cout<<"------------------------"<<endl;
