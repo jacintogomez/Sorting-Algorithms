@@ -286,25 +286,20 @@ void heapify(vector<int>& ar,int n,int parent){
 
 void heap(vector<int>& ar){
     print(ar);
-    cout<<"----> call heapify to turn array into binary tree"<<endl;
+    cout<<"----> call heapify to turn array into max heap"<<endl;
     int n=ar.size();
     for(int i=n/2-1;i>=0;i--){heapify(ar,n,i);}
     print(ar);
     cout<<"----> keep calling heapify each time a max element is taken away"<<endl;
-    int prevfront=-1;
     for(int j=n-1;j>=0;j--){
         int temp=ar[0];
+        int last=ar[j];
         ar[0]=ar[j];
         ar[j]=temp;
         heapify(ar,j,0);
         print(ar);
         printsortedportionbubble(j,ar);
-        if(prevfront==ar[j]){
-            cout<<" next max "<<ar[j]<<" was already at heap root, then removed to the back"<<endl;
-        }else{
-            cout<<" the max element "<<ar[j]<<" was pushed to the root of the heap and then removed"<<endl;
-        }
-        prevfront=ar[0];
+        cout<<" the heap root "<<temp<<" was switched with the last node "<<last<<", then heapified"<<endl;
     }
 }
 
@@ -333,12 +328,10 @@ void countsort(vector<int>& ar,int exp){
 
 void radix(vector<int>& ar){
     int m=getmax(ar);
-    int e=1;
     for(int exp=1;m/exp>0;exp*=10){
         countsort(ar,exp);
         print(ar);
-        cout<<"---> all numbers lower than "<<pow(10,e)<<" are now sorted with respect to each other"<<endl;
-        e++;
+        cout<<"---> called counting sort on the "<<exp<<"'s digit"<<endl;
     }
 }
 
@@ -398,7 +391,7 @@ void displayalgoinfo(){
     cout<<"------------------------"<<endl;
     cout<<"Insertion Sort: "<<endl;
     cout<<"For each element, insert it by pushing it back until it's in its proper spot in the sorted part of the array."<<endl;
-    cout<<"Time Complexity: Omega(n), O(n^2)"<<endl;
+    cout<<"Time Complexity: Omega(n), Theta(n^2), O(n^2)"<<endl;
     cout<<"Space Complexity: O(1)"<<endl;
     cout<<"------------------------"<<endl;
     cout<<"Selection Sort:"<<endl;
@@ -410,28 +403,28 @@ void displayalgoinfo(){
     cout<<"Compare side by side elements and swap if the left one is larger; with each trial of this the next largest"
         "\nelement 'bubbles' to the top. This needs to be done for n passes, since each pass only brings the"
         "\nnext largest element to the top."<<endl;
-    cout<<"Time Complexity: Omega(n), O(n^2)"<<endl;
+    cout<<"Time Complexity: Omega(n), Theta(n^2), O(n^2)"<<endl;
     cout<<"Space Complexity: O(1)"<<endl;
     cout<<"------------------------"<<endl;
     cout<<"Quicksort:"<<endl;
-    cout<<"Recursive! For each call, a random element called the pivor is chosen and all elements greater than it are"
+    cout<<"Recursive! For each call, a random element called the pivot is chosen and all elements less than it are"
         "\nplaced to the left, and all elements greater are placed to the right. It is then recursively called on those two halves."
         "\nA function called partition is used to select the pivot either randomly, or as a fixed array index."<<endl;
-    cout<<"Time Complexity: Theta(nlog(n)), O(n^2)"<<endl;
+    cout<<"Time Complexity: Omega(nlog(n)), Theta(nlog(n)), O(n^2)"<<endl;
     cout<<"Space Complexity: O(nlog(n))"<<endl;
     cout<<"------------------------"<<endl;
     cout<<"Heapsort:"<<endl;
     cout<<"Recursive! (kinda) This forms a max heap (basically a binary search tree, but without the rule that the right child is"
         "\ngreater than the left), and for each node starting from the last leaf, switches it with the root node and calls"
         "\na function called heapify, which restructures the tree so that the max element is on top again. Each time a max"
-        "\nelement is removed, it is essentially at the end of an array; in other words, is now in sorted position, It should"
+        "\nelement is removed, it is essentially at the end of an array; in other words, is now in sorted position. It should"
         "\nbe noted that heapsort itself is not recursive, but it calls heapify which is."<<endl;
     cout<<"Time Complexity: Theta(nlog(n))"<<endl;
     cout<<"Space Complexity: O(1)"<<endl;
     cout<<"------------------------"<<endl;
     cout<<"Counting Sort:"<<endl;
     cout<<"Create two new arrays, one counting the frequency of occurrence of each number in the array (then adjusted"
-        "\nto represent the array index), and the other to hold the output array. The index array at index i is updated with the"
+        "\nto represent the array index), and the other to hold the output array. The output array at index i is updated with the"
         "\nvalue of indexarray[originalarray[i]] for each i in range n. This results in linear runtime, but it only works"
         "\nif the range of numbers is known beforehand. This is also a stable sort, meaning the order of repeated values doesn't change"<<endl;
     cout<<"Time Complexity: Theta(n+k) k=range of possible values"<<endl;
@@ -439,14 +432,14 @@ void displayalgoinfo(){
     cout<<"------------------------"<<endl;
     cout<<"Radix Sort:"<<endl;
     cout<<"This will first sort all elements by the digit in the 1's place, then by the digit in the 10's place.. continuing"
-          "\nthrough to the last digit. The sorting is done with some stable sorting algorithm (counting sort, for example)"<<endl;
+          "\nthrough to the last digit. The sorting is done with some stable sorting algorithm (counting sort, for example)."<<endl;
     cout<<"Time Complexity: Theta(d(n+k)) d=max # of digits, k=base of whatever number we are using (usually 10)"<<endl;
     cout<<"Space Complexity: O(n+k)"<<endl;
     cout<<"------------------------"<<endl;
     cout<<"Bucket Sort:"<<endl;
-    cout<<"Adjust input so they are all in range [0:1), and divide range into buckets where certain ranges of values will go"
-          "\nThese buckets, which will ideally be near-sorted, are then sorted using insertion sort"<<endl;
-    cout<<"Time Complexity: Theta(n+k), O(n^2)"<<endl;
+    cout<<"Adjust input so they are all in range [0:1), and divide range into buckets where certain ranges of values will go."
+          "\nThese buckets, which will ideally be near-sorted, are then sorted using insertion sort."<<endl;
+    cout<<"Time Complexity: Omega(n+k), Theta(n+k), O(n^2)"<<endl;
     cout<<"Space Complexity: O(n)"<<endl;
 }
 
