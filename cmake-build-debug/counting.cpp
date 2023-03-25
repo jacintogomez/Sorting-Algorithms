@@ -33,54 +33,32 @@ int getmax(vector<int> ar){
     return mx;
 }
 
-void counting(vector<int>& ar,int max){
+void counting(vector<int>& ar){
+    int max=getmax(ar);
+    cout<<"This will use the max value of your array as the range...";
     int n=ar.size();
     vector<int> output(n,0);
-    cout<<"output array initialized as ---> ";
+    cout<<"Output array initialized as ---> ";
     print(output);
     vector<int> count(max+1,0);
-    cout<<"count array initialized as ---> ";
+    cout<<"Count array initialized as ---> ";
     print(count);
     for(int i=0;i<n;i++){count[ar[i]]++;}
-    cout<<"count updated with frequency of each index ---> ";
+    cout<<"Count updated with frequency of each index ---> ";
     print(count);
     for(int j=1;j<=max;j++){count[j]+=count[j-1];}
-    cout<<"count updated with index of each index --> ";
+    cout<<"Count updated with index of each index --> ";
     print(count);
     for(int k=n-1;k>=0;k--){
-        cout<<"placing "<<ar[k]<<" into output array"<<endl;
+        cout<<"Placing "<<ar[k]<<" into output array"<<endl;
         output[count[ar[k]]-1]=ar[k];
         count[ar[k]]--;
-        cout<<"output is now --> ";
+        cout<<"Output is now --> ";
         printsameline(output);
-        cout<<", count array is now --> ";
+        cout<<"Count is now --> ";
         print(count);
     }
     ar=output;
-}
-
-void countsort(vector<int>& ar,int exp){
-    int n=ar.size();
-    vector<int> output(n,0);
-    vector<int> count(10,0);
-    for(int i=0;i<n;i++){count[(ar[i]/exp)%10]++;}
-    for(int i=1;i<10;i++){count[i]+=count[i-1];}
-    for(int i=n-1;i>=0;i--){
-        output[count[(ar[i]/exp)%10]-1]=ar[i];
-        count[(ar[i]/exp)%10]--;
-    }
-    for(int i=0;i<n;i++){ar[i]=output[i];}
-}
-
-void radix(vector<int>& ar){
-    int m=getmax(ar);
-    int e=1;
-    for(int exp=1;m/exp>0;exp*=10){
-        countsort(ar,exp);
-        print(ar);
-        cout<<"---> all numbers lower than "<<pow(10,e)<<" are now sorted with respect to each other"<<endl;
-        e++;
-    }
 }
 
 int main(){
@@ -96,7 +74,7 @@ int main(){
     cout<<"Counting Sort"<<endl;
     cout<<"Original Array: ";
     print(list);
-    counting(list,max);
+    counting(list);
     cout<<"Final Sorted Array: ";
     print(list);
     return 0;
