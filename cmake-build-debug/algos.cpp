@@ -176,7 +176,7 @@ void merge(vector<int>& ar,int begin,int end,int step){
     mergesort(ar,begin,mid,end);
     print(ar);
     printsortedportionmerge(countspacesmerge(ar,begin),countmiddleunderscores(ar,begin,end));
-    cout<<" this call is "<<step<<" level(s) deep"<<endl;
+    cout<<" this recursive call is "<<step<<" level(s) deep"<<endl;
 }
 
 void bubble(vector<int> ar){
@@ -198,8 +198,6 @@ void bubble(vector<int> ar){
             cout<<" next largest element "<<ar[i]<<" was already in sorted position"<<endl;
         }
     }
-    cout<<"Final Sorted Array: ";
-    print(ar);
 }
 
 void selection(vector<int> ar){
@@ -223,8 +221,6 @@ void selection(vector<int> ar){
             cout<<" "<<ar[min]<<" happened to be the next smallest, so no swap occurred"<<endl;
         }
     }
-    cout<<"Final Sorted Array: ";
-    print(ar);
 }
 
 void insertion(vector<int> ar){
@@ -245,8 +241,6 @@ void insertion(vector<int> ar){
             cout<<"next element was the largest so far, no insertions were necessary"<<endl;
         }
     }
-    cout<<"Final Sorted Array: ";
-    print(ar);
 }
 
 void printsortedportionquick(int index,vector<int> ve){
@@ -255,6 +249,7 @@ void printsortedportionquick(int index,vector<int> ve){
     int spacesuptopivot=countspacesbubble(ve,index+1)-2;
     int pivotspaces=spacesuptopivot-spacestoindex-1;
     int afterpiv=totalchars-spacesuptopivot-1;
+    cout<<" <-- Pivot is "<<ve[index]<<", numbers greater than it placed to the left, smaller to the right"<<endl;
     if(index!=0){cout<<"|";}
     else{spacestoindex++;}
     for(int i=1;i<=spacestoindex;i++){
@@ -269,10 +264,9 @@ void printsortedportionquick(int index,vector<int> ve){
         cout<<"_";
     }
     if(index!=ve.size()-1){cout<<"|";}
-    cout<<" <-pivot is "<<ve[index]<<"... ";
 }
 
-int partition(vector<int>& ar,int low,int high){
+int partition(vector<int>& ar,int low,int high,int step){
     int pivot=ar[high];
     int i=low-1;
     for(int j=low;j<=high-1;j++){
@@ -286,17 +280,17 @@ int partition(vector<int>& ar,int low,int high){
     int other=ar[i+1];
     ar[i+1]=ar[high];
     ar[high]=other;
-    print(ar);
+    printsameline(ar);
     printsortedportionquick(i+1,ar);
-    cout<<"numbers greater than "<<pivot<<" are placed to the left of it, and ones smaller than it on the right"<<endl;
+    cout<<"     This recursive call is "<<step<<" level(s) deep"<<endl;
     return i+1;
 }
 
-void quick(vector<int>& ar,int low,int high){
+void quick(vector<int>& ar,int low,int high,int step){
     if(low<high){
-        int pivot=partition(ar,low,high);
-        quick(ar,low,pivot-1);
-        quick(ar,pivot+1,high);
+        int pivot=partition(ar,low,high,step);
+        quick(ar,low,pivot-1,step+1);
+        quick(ar,pivot+1,high,step+1);
     }
 }
 
@@ -315,21 +309,21 @@ void heapify(vector<int>& ar,int n,int parent){
 }
 
 void heap(vector<int>& ar){
-    print(ar);
-    cout<<"----> call heapify to turn array into max heap"<<endl;
+    cout<<"Call heapify to turn array into max heap --> ";
     int n=ar.size();
     for(int i=n/2-1;i>=0;i--){heapify(ar,n,i);}
     print(ar);
-    cout<<"----> keep calling heapify each time a max element is taken away"<<endl;
-    for(int j=n-1;j>=0;j--){
+    cout<<"Keep calling heapify each time a max element is taken away.."<<endl;
+    for(int j=n-1;j>=1;j--){
         int temp=ar[0];
-        int last=ar[j];
         ar[0]=ar[j];
         ar[j]=temp;
+        printsameline(ar);
+        cout<<"   Switched heap root "<<temp<<" with last leaf "<<ar[0]<<", then call heapify on new root"<<endl;
         heapify(ar,j,0);
         print(ar);
         printsortedportionbubble(j,ar);
-        cout<<" the heap root "<<temp<<" was switched with the last node "<<last<<", then heapified"<<endl;
+        cout<<ar[j]<<" removed from heap"<<endl;
     }
 }
 
@@ -367,11 +361,13 @@ void countsort(vector<int>& ar,int exp){
 }
 
 void radix(vector<int>& ar){
+    int step=1;
     int m=getmax(ar);
     for(int exp=1;m/exp>0;exp*=10){
         countsort(ar,exp);
-        print(ar);
-        cout<<"---> called counting sort on the "<<exp<<"'s digit"<<endl;
+        printsameline(ar);
+        cout<<"<--- iteration "<<step<<" called counting sort on the "<<exp<<"'s digit"<<endl;
+        step++;
     }
 }
 
@@ -607,7 +603,7 @@ void switchloop1(int choice,vector<int> list){
 //            cout<<"pick a random element and place all numbers greater than it on one side, and less than on the other; repeat this recursively for the two halves"<<endl;
 //            cout<<"Time Complexity: O(n^2), Omega(nlog(n))"<<endl;
 //            cout<<"Space Complexity: O(nlog(n))"<<endl;
-            quick(list,0,list.size()-1);
+            quick(list,0,list.size()-1,0);
             break;
         case 6:
             cout<<"Heapsort:"<<endl;
@@ -634,6 +630,8 @@ void switchloop1(int choice,vector<int> list){
         default:
             cout<<"No selection made/Invalid selection"<<endl;
     }
+    cout<<"Final Sorted Array: ";
+    print(list);
 }
 
 void switchloop2(int choice,vector<int>& list){

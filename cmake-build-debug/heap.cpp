@@ -11,6 +11,18 @@ void print(vector<int> ar){
     cout<<ar.back()<<"]"<<endl;
 }
 
+void printsameline(vector<int> ar){
+    cout<<"[";
+    if(ar.size()==0){
+        cout<<"[]";
+        return;
+    }
+    for(int x=0;x<ar.size()-1;x++){
+        cout<<ar[x]<<",";
+    }
+    cout<<ar.back()<<"]";
+}
+
 int counttotalspaces(vector<int> ve){
     int count=0;
     for(int i=0;i<ve.size();i++){
@@ -62,21 +74,23 @@ void heapify(vector<int>& ar,int n,int parent){
 void heap(vector<int>& ar){
     int n=ar.size();
     for(int i=n/2-1;i>=0;i--){heapify(ar,n,i);}
-    for(int j=n-1;j>=0;j--){
+    for(int j=n-1;j>=1;j--){
         int temp=ar[0];
         ar[0]=ar[j];
         ar[j]=temp;
+        printsameline(ar);
+        cout<<"   switched heap root "<<temp<<" with last leaf "<<ar[0]<<", then call heapify on new root"<<endl;
         heapify(ar,j,0);
         print(ar);
         printsortedportion(j,ar);
-        cout<<" the max element "<<ar[j]<<" was pushed to the root of the heap and then removed"<<endl;
+        cout<<ar[j]<<" removed from heap"<<endl;
     }
 }
 
 int main(){
     //vector<int> list={999,104,2,1024,16};
-    vector<int> list={8,2,5,6,4,3,7,1};
-    //vector<int> list={9,88,2000,100,43,546,2,32};
+    //vector<int> list={8,2,5,6,4,3,7,1};
+    vector<int> list={9,88,2000,100,43,546,2,32};
     cout<<"Heap Sort"<<endl;
     cout<<"Original Array: ";
     print(list);
