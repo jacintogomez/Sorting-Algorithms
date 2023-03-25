@@ -11,6 +11,18 @@ void print(vector<int> ar){
     cout<<ar.back()<<"]"<<endl;
 }
 
+void printsameline(vector<int> ar){
+    cout<<"[";
+    if(ar.size()==0){
+        cout<<"[]";
+        return;
+    }
+    for(int x=0;x<ar.size()-1;x++){
+        cout<<ar[x]<<",";
+    }
+    cout<<ar.back()<<"]";
+}
+
 int getmax(vector<int> ar){
     int mx=ar[0];
     for(int i:ar){
@@ -40,7 +52,9 @@ void counting(vector<int>& ar,int max){
         output[count[ar[k]]-1]=ar[k];
         count[ar[k]]--;
         cout<<"output is now --> ";
-        print(output);
+        printsameline(output);
+        cout<<", count array is now --> ";
+        print(count);
     }
     ar=output;
 }
@@ -70,14 +84,14 @@ void radix(vector<int>& ar){
 }
 
 int main(){
-    //vector<int> list={8,2,5,6,4,3,7,1};
-    vector<int> list={9,88,2000,100,43,546,2,32};
+    vector<int> list={8,2,5,6,4,3,7,1,4,5,7,3,2,9,0,0,0,1,1,2};
+    //vector<int> list={9,88,2000,100,43,546,2,32};
     int max=0,realmax=getmax(list);
     cout<<"Input max value: ";
     cin>>max;
-    if(max<realmax){
-        cout<<"range must be at least as large as the max array value";
-        exit(1);
+    while(max<realmax){
+        cout<<"range must be at least as large as the max array value"<<endl;
+        cin>>max;
     }
     cout<<"Counting Sort"<<endl;
     cout<<"Original Array: ";

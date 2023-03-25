@@ -8,11 +8,27 @@
 using namespace std;
 
 void print(vector<int> ar){
+    if(ar.size()==0){
+        cout<<"[]"<<endl;
+        return;
+    }
     cout<<"[";
     for(int x=0;x<ar.size()-1;x++){
         cout<<ar[x]<<",";
     }
     cout<<ar.back()<<"]"<<endl;
+}
+
+void printsameline(vector<int> ar){
+    if(ar.size()==0){
+        cout<<"[]";
+        return;
+    }
+    cout<<"[";
+    for(int x=0;x<ar.size()-1;x++){
+        cout<<ar[x]<<",";
+    }
+    cout<<ar.back()<<"]";
 }
 
 void printsortedportion(int index){
@@ -106,6 +122,18 @@ void printsortedportionmerge(int blanks,int range){
         cout<<"_";
     }
     cout<<"| <-segment just sorted... ";
+}
+
+void insertionwithoutmessages(vector<int>& ar){
+    for(int i=1;i<ar.size();i++){
+        int key=ar[i];
+        int j=i-1;
+        while(j>=0&&ar[j]>key){
+            ar[j+1]=ar[j];
+            j--;
+        }
+        ar[j+1]=key;
+    }
 }
 
 void mergesort(vector<int>& ar,int left,int mid,int right){
@@ -315,6 +343,16 @@ int getmax(vector<int> ar){
     return mx;
 }
 
+int getmin(vector<int> ar){
+    int mn=ar[0];
+    for(int i:ar){
+        if(i<mn){
+            mn=i;
+        }
+    }
+    return mn;
+}
+
 void countsort(vector<int>& ar,int exp){
     int n=ar.size();
     vector<int> output(n,0);
@@ -348,25 +386,78 @@ void counting(vector<int>& ar){
     }
     int n=ar.size();
     vector<int> output(n,0);
-    cout<<"output array initialized as ---> ";
+    cout<<"Output array initialized as ---> ";
     print(output);
     vector<int> count(max+1,0);
-    cout<<"count array initialized as ---> ";
+    cout<<"Count array initialized as ---> ";
     print(count);
     for(int i=0;i<n;i++){count[ar[i]]++;}
-    cout<<"count updated with frequency of each index ---> ";
+    cout<<"Count updated with frequency of each index ---> ";
     print(count);
     for(int j=1;j<=max;j++){count[j]+=count[j-1];}
-    cout<<"count updated with index of each index --> ";
+    cout<<"Count updated with index of each index --> ";
     print(count);
     for(int k=n-1;k>=0;k--){
-        cout<<"placing "<<ar[k]<<" into output array"<<endl;
+        cout<<"Placing "<<ar[k]<<" into output array"<<endl;
         output[count[ar[k]]-1]=ar[k];
         count[ar[k]]--;
-        cout<<"output is now --> ";
-        print(output);
+        cout<<"Output is now --> ";
+        printsameline(output);
+        cout<<"Count is now --> ";
+        print(count);
     }
     ar=output;
+}
+
+void bucket(vector<int>& ar){
+    double max=getmax(ar);
+    double min=getmin(ar);
+    int buckets;
+    cout<<"If you want to choose your number of buckets then enter it below,"
+          "\notherwise enter 0 to use the square root of n"<<endl;
+    cout<<"Number of buckets: ";
+    cin>>buckets;
+    while(buckets<0){
+        cout<<"Bucket number must be positive!"<<endl;
+        cout<<"Re-enter the number of buckets: ";
+        cin>>buckets;
+    }
+    if(buckets==0){
+        buckets=int(pow(ar.size(),0.5));
+    }
+    double rnge=double((max-min)/buckets);
+    vector<vector<int>> all;
+    for(int x=0;x<buckets;x++){
+        all.push_back(vector<int>());
+    }
+    for(int i=0;i<ar.size();i++){
+        double diff=(ar[i]-min)/rnge-int((ar[i]-min)/rnge);
+        if(diff==0&&ar[i]!=min){
+            all[int((ar[i]-min)/rnge)-1].push_back(ar[i]);
+        }else{
+            all[int((ar[i]-min)/rnge)].push_back(ar[i]);
+        }
+    }
+    cout<<"Sort elements of specific ranges into buckets:"<<endl;
+    for(int j=0;j<all.size();j++){
+        cout<<"Bucket "<<j+1<<": ";
+        print(all[j]);
+    }
+    for(int j=0;j<all.size();j++){
+        if(!all[j].empty()){
+            insertionwithoutmessages(all[j]);
+        }
+    }
+    cout<<"Sort each bucket with insertion sort, and concatenate into one array"<<endl;
+    int k=0;
+    for(vector<int>& l:all){
+        if(!l.empty()){
+            for(double i:l){
+                ar[k]=i;
+                k++;
+            }
+        }
+    }
 }
 
 vector<int> vecmaker(string in){
@@ -538,8 +629,7 @@ void switchloop1(int choice,vector<int> list){
             break;
         case 9:
             cout<<"Bucket Sort"<<endl;
-            cout<<"Not yet done!"<<endl;
-            //bucket(list);
+            bucket(list);
             break;
         default:
             cout<<"No selection made/Invalid selection"<<endl;
