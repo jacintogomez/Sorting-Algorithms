@@ -29,7 +29,7 @@ int countspaces(vector<int> ve,int index){
     return count;
 }
 
-void selection(vector<int> ar){
+void selection(vector<int>& ar){
     for(int i=0;i<ar.size();i++){
         int min=i;
         for(int j=i+1;j<ar.size();j++){
@@ -50,8 +50,6 @@ void selection(vector<int> ar){
             cout<<" "<<ar[min]<<" was the next smallest, so no swap occurred"<<endl;
         }
     }
-    cout<<"Final Sorted Array: ";
-    print(ar);
 }
 
 int main(){
@@ -61,5 +59,7 @@ int main(){
     cout<<"Original Array: ";
     print(list);
     selection(list);
+    cout<<"Final Sorted Array: ";
+    print(list);
     return 0;
 }

@@ -372,14 +372,8 @@ void radix(vector<int>& ar){
 }
 
 void counting(vector<int>& ar){
-    int max=0,realmax=getmax(ar);
-    cout<<"This requires a specified range; input the max value: ";
-    cin>>max;
-    if(max<realmax){
-        cout<<"Range must be at least as large as the max array value..."
-              "\n...your input range will be switched to the max int found in the array"<<endl;
-        max=realmax;
-    }
+    int max=getmax(ar);
+    cout<<"This will use the max value of your array as the range...";
     int n=ar.size();
     vector<int> output(n,0);
     cout<<"Output array initialized as ---> ";

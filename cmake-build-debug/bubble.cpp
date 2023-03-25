@@ -45,7 +45,7 @@ void printsortedportion(int index,vector<int> ve){
     cout<<"| <-sorted portion... ";
 }
 
-void bubble(vector<int> ar){
+void bubble(vector<int>& ar){
     for(int i=ar.size()-1;i>=0;i--){
         bool swap=false;
         for(int j=0;j<i;j++) {
@@ -64,8 +64,6 @@ void bubble(vector<int> ar){
             cout<<" next largest element "<<ar[i]<<" is already in sorted position"<<endl;
         }
     }
-    cout<<"Final Sorted Array: ";
-    print(ar);
 }
 
 int main(){
@@ -75,5 +73,7 @@ int main(){
     cout<<"Original Array: ";
     print(list);
     bubble(list);
+    cout<<"Final Sorted Array: ";
+    print(list);
     return 0;
 }

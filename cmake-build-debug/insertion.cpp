@@ -29,7 +29,7 @@ int countspaces(vector<int> ve,int index){
     return count;
 }
 
-void insertion(vector<int> ar){
+void insertion(vector<int>& ar){
     for(int i=1;i<ar.size();i++){
         int key=ar[i];
         int j=i-1;
@@ -47,8 +47,6 @@ void insertion(vector<int> ar){
             cout<<"no insertions were necessary"<<endl;
         }
     }
-    cout<<"Final Sorted Array: ";
-    print(ar);
 }
 
 int main(){
@@ -58,5 +56,7 @@ int main(){
     cout<<"Original Array: ";
     print(list);
     insertion(list);
+    cout<<"Final Sorted Array: ";
+    print(list);
     return 0;
 }
