@@ -11,6 +11,18 @@ void print(vector<int> ar){
     cout<<ar.back()<<"]"<<endl;
 }
 
+void printsameline(vector<int> ar){
+    if(ar.size()==0){
+        cout<<"[]";
+        return;
+    }
+    cout<<"[";
+    for(int x=0;x<ar.size()-1;x++){
+        cout<<ar[x]<<",";
+    }
+    cout<<ar.back()<<"]";
+}
+
 int counttotalspaces(vector<int> ve){
     int count=0;
     for(int i=0;i<ve.size();i++){
@@ -31,12 +43,13 @@ int countspaces(vector<int> ve,int index){
     return count;
 }
 
-void printsortedportion(int index,vector<int> ve){
+void printsortedportionquick(int index,vector<int> ve){
     int totalchars=counttotalspaces(ve)-2; //-2 to subtract the brackets
     int spacestoindex=countspaces(ve,index)-2; //-2 to subtract the two |'s
     int spacesuptopivot=countspaces(ve,index+1)-2;
     int pivotspaces=spacesuptopivot-spacestoindex-1;
     int afterpiv=totalchars-spacesuptopivot-1;
+    cout<<" <-- Pivot is "<<ve[index]<<", numbers greater than it placed to the left, smaller to the right"<<endl;
     if(index!=0){cout<<"|";}
     else{spacestoindex++;}
     for(int i=1;i<=spacestoindex;i++){
@@ -51,10 +64,9 @@ void printsortedportion(int index,vector<int> ve){
         cout<<"_";
     }
     if(index!=ve.size()-1){cout<<"|";}
-    cout<<" <-pivot is "<<ve[index]<<"... ";
 }
 
-int partition(vector<int>& ar,int low,int high){
+int partition(vector<int>& ar,int low,int high,int step){
     int pivot=ar[high];
     int i=low-1;
     for(int j=low;j<=high-1;j++){
@@ -68,17 +80,17 @@ int partition(vector<int>& ar,int low,int high){
     int other=ar[i+1];
     ar[i+1]=ar[high];
     ar[high]=other;
-    print(ar);
-    printsortedportion(i+1,ar);
-    cout<<"numbers greater than "<<pivot<<" are placed on the left, and less than "<<pivot<<" are on the right"<<endl;
+    printsameline(ar);
+    printsortedportionquick(i+1,ar);
+    cout<<"     This recursive call is "<<step<<" level(s) deep"<<endl;
     return i+1;
 }
 
-void quick(vector<int>& ar,int low,int high){
+void quick(vector<int>& ar,int low,int high,int step){
     if(low<high){
-        int pivot=partition(ar,low,high);
-        quick(ar,low,pivot-1);
-        quick(ar,pivot+1,high);
+        int pivot=partition(ar,low,high,step);
+        quick(ar,low,pivot-1,step+1);
+        quick(ar,pivot+1,high,step+1);
     }
 }
 
@@ -89,7 +101,7 @@ int main(){
     cout<<"Quick Sort"<<endl;
     cout<<"Original Array: ";
     print(list);
-    quick(list,0,list.size()-1);
+    quick(list,0,list.size()-1,0);
     cout<<"Final Sorted Array: ";
     print(list);
     return 0;

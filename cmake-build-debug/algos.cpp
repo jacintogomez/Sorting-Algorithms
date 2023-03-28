@@ -1,4 +1,6 @@
 //Created by Jacinto Gomez
+//NYU Tandon School of Engineering
+//Cornell College of Engineering
 
 #include <iostream>
 #include <string>
@@ -6,11 +8,27 @@
 using namespace std;
 
 void print(vector<int> ar){
+    if(ar.size()==0){
+        cout<<"[]"<<endl;
+        return;
+    }
     cout<<"[";
     for(int x=0;x<ar.size()-1;x++){
         cout<<ar[x]<<",";
     }
     cout<<ar.back()<<"]"<<endl;
+}
+
+void printsameline(vector<int> ar){
+    if(ar.size()==0){
+        cout<<"[]";
+        return;
+    }
+    cout<<"[";
+    for(int x=0;x<ar.size()-1;x++){
+        cout<<ar[x]<<",";
+    }
+    cout<<ar.back()<<"]";
 }
 
 void printsortedportion(int index){
@@ -106,6 +124,18 @@ void printsortedportionmerge(int blanks,int range){
     cout<<"| <-segment just sorted... ";
 }
 
+void insertionwithoutmessages(vector<int>& ar){
+    for(int i=1;i<ar.size();i++){
+        int key=ar[i];
+        int j=i-1;
+        while(j>=0&&ar[j]>key){
+            ar[j+1]=ar[j];
+            j--;
+        }
+        ar[j+1]=key;
+    }
+}
+
 void mergesort(vector<int>& ar,int left,int mid,int right){
     vector<int> half1= {};
     vector<int> half2= {};
@@ -146,10 +176,10 @@ void merge(vector<int>& ar,int begin,int end,int step){
     mergesort(ar,begin,mid,end);
     print(ar);
     printsortedportionmerge(countspacesmerge(ar,begin),countmiddleunderscores(ar,begin,end));
-    cout<<" this call is "<<step<<" level(s) deep"<<endl;
+    cout<<" this recursive call is "<<step<<" level(s) deep"<<endl;
 }
 
-void bubble(vector<int> ar){
+void bubble(vector<int>& ar){
     for(int i=ar.size()-1;i>=0;i--){
         bool swap=false;
         for(int j=0;j<i;j++) {
@@ -168,11 +198,9 @@ void bubble(vector<int> ar){
             cout<<" next largest element "<<ar[i]<<" was already in sorted position"<<endl;
         }
     }
-    cout<<"Final Sorted Array: ";
-    print(ar);
 }
 
-void selection(vector<int> ar){
+void selection(vector<int>& ar){
     for(int i=0;i<ar.size();i++){
         int min=i;
         for(int j=i+1;j<ar.size();j++){
@@ -193,11 +221,9 @@ void selection(vector<int> ar){
             cout<<" "<<ar[min]<<" happened to be the next smallest, so no swap occurred"<<endl;
         }
     }
-    cout<<"Final Sorted Array: ";
-    print(ar);
 }
 
-void insertion(vector<int> ar){
+void insertion(vector<int>& ar){
     for(int i=1;i<ar.size();i++){
         int key=ar[i];
         int j=i-1;
@@ -215,8 +241,6 @@ void insertion(vector<int> ar){
             cout<<"next element was the largest so far, no insertions were necessary"<<endl;
         }
     }
-    cout<<"Final Sorted Array: ";
-    print(ar);
 }
 
 void printsortedportionquick(int index,vector<int> ve){
@@ -225,6 +249,7 @@ void printsortedportionquick(int index,vector<int> ve){
     int spacesuptopivot=countspacesbubble(ve,index+1)-2;
     int pivotspaces=spacesuptopivot-spacestoindex-1;
     int afterpiv=totalchars-spacesuptopivot-1;
+    cout<<" <-- Pivot is "<<ve[index]<<", numbers greater than it placed to the left, smaller to the right"<<endl;
     if(index!=0){cout<<"|";}
     else{spacestoindex++;}
     for(int i=1;i<=spacestoindex;i++){
@@ -239,10 +264,9 @@ void printsortedportionquick(int index,vector<int> ve){
         cout<<"_";
     }
     if(index!=ve.size()-1){cout<<"|";}
-    cout<<" <-pivot is "<<ve[index]<<"... ";
 }
 
-int partition(vector<int>& ar,int low,int high){
+int partition(vector<int>& ar,int low,int high,int step){
     int pivot=ar[high];
     int i=low-1;
     for(int j=low;j<=high-1;j++){
@@ -256,17 +280,17 @@ int partition(vector<int>& ar,int low,int high){
     int other=ar[i+1];
     ar[i+1]=ar[high];
     ar[high]=other;
-    print(ar);
+    printsameline(ar);
     printsortedportionquick(i+1,ar);
-    cout<<"numbers greater than "<<pivot<<" are placed to the left of it, and ones smaller than it on the right"<<endl;
+    cout<<"     This recursive call is "<<step<<" level(s) deep"<<endl;
     return i+1;
 }
 
-void quick(vector<int>& ar,int low,int high){
+void quick(vector<int>& ar,int low,int high,int step){
     if(low<high){
-        int pivot=partition(ar,low,high);
-        quick(ar,low,pivot-1);
-        quick(ar,pivot+1,high);
+        int pivot=partition(ar,low,high,step);
+        quick(ar,low,pivot-1,step+1);
+        quick(ar,pivot+1,high,step+1);
     }
 }
 
@@ -285,26 +309,21 @@ void heapify(vector<int>& ar,int n,int parent){
 }
 
 void heap(vector<int>& ar){
-    print(ar);
-    cout<<"----> call heapify to turn array into binary tree"<<endl;
+    cout<<"Call heapify to turn array into max heap --> ";
     int n=ar.size();
     for(int i=n/2-1;i>=0;i--){heapify(ar,n,i);}
     print(ar);
-    cout<<"----> keep calling heapify each time a max element is taken away"<<endl;
-    int prevfront=-1;
-    for(int j=n-1;j>=0;j--){
+    cout<<"Keep calling heapify each time a max element is taken away.."<<endl;
+    for(int j=n-1;j>=1;j--){
         int temp=ar[0];
         ar[0]=ar[j];
         ar[j]=temp;
+        printsameline(ar);
+        cout<<"   Switched heap root "<<temp<<" with last leaf "<<ar[0]<<", then call heapify on new root"<<endl;
         heapify(ar,j,0);
         print(ar);
         printsortedportionbubble(j,ar);
-        if(prevfront==ar[j]){
-            cout<<" next max "<<ar[j]<<" was already at heap root, then removed to the back"<<endl;
-        }else{
-            cout<<" the max element "<<ar[j]<<" was pushed to the root of the heap and then removed"<<endl;
-        }
-        prevfront=ar[0];
+        cout<<ar[j]<<" removed from heap"<<endl;
     }
 }
 
@@ -316,6 +335,16 @@ int getmax(vector<int> ar){
         }
     }
     return mx;
+}
+
+int getmin(vector<int> ar){
+    int mn=ar[0];
+    for(int i:ar){
+        if(i<mn){
+            mn=i;
+        }
+    }
+    return mn;
 }
 
 void countsort(vector<int>& ar,int exp){
@@ -332,13 +361,92 @@ void countsort(vector<int>& ar,int exp){
 }
 
 void radix(vector<int>& ar){
+    int step=1;
     int m=getmax(ar);
-    int e=1;
     for(int exp=1;m/exp>0;exp*=10){
         countsort(ar,exp);
-        print(ar);
-        cout<<"---> all numbers lower than "<<pow(10,e)<<" are now sorted with respect to each other"<<endl;
-        e++;
+        printsameline(ar);
+        cout<<"<--- iteration "<<step<<" called counting sort on the "<<exp<<"'s digit"<<endl;
+        step++;
+    }
+}
+
+void counting(vector<int>& ar){
+    int max=getmax(ar);
+    cout<<"This will use the max value of your array as the range...";
+    int n=ar.size();
+    vector<int> output(n,0);
+    cout<<"Output array initialized as ---> ";
+    print(output);
+    vector<int> count(max+1,0);
+    cout<<"Count array initialized as ---> ";
+    print(count);
+    for(int i=0;i<n;i++){count[ar[i]]++;}
+    cout<<"Count updated with frequency of each index ---> ";
+    print(count);
+    for(int j=1;j<=max;j++){count[j]+=count[j-1];}
+    cout<<"Count updated with index of each index --> ";
+    print(count);
+    for(int k=n-1;k>=0;k--){
+        cout<<"Placing "<<ar[k]<<" into output array"<<endl;
+        output[count[ar[k]]-1]=ar[k];
+        count[ar[k]]--;
+        cout<<"Output is now --> ";
+        printsameline(output);
+        cout<<"Count is now --> ";
+        print(count);
+    }
+    ar=output;
+}
+
+void bucket(vector<int>& ar){
+    double max=getmax(ar);
+    double min=getmin(ar);
+    int buckets;
+    cout<<"If you want to choose your number of buckets then enter it below,"
+          "\notherwise enter 0 to use the square root of n"<<endl;
+    cout<<"Number of buckets: ";
+    cin>>buckets;
+    while(buckets<0){
+        cout<<"Bucket number must be positive!"<<endl;
+        cout<<"Re-enter the number of buckets: ";
+        cin>>buckets;
+    }
+    if(buckets==0){
+        buckets=int(pow(ar.size(),0.5));
+    }
+    double rnge=double((max-min)/buckets);
+    vector<vector<int>> all;
+    for(int x=0;x<buckets;x++){
+        all.push_back(vector<int>());
+    }
+    for(int i=0;i<ar.size();i++){
+        double diff=(ar[i]-min)/rnge-int((ar[i]-min)/rnge);
+        if(diff==0&&ar[i]!=min){
+            all[int((ar[i]-min)/rnge)-1].push_back(ar[i]);
+        }else{
+            all[int((ar[i]-min)/rnge)].push_back(ar[i]);
+        }
+    }
+    cout<<"Sort elements of specific ranges into buckets:"<<endl;
+    for(int j=0;j<all.size();j++){
+        cout<<"Bucket "<<j+1<<": ";
+        print(all[j]);
+    }
+    for(int j=0;j<all.size();j++){
+        if(!all[j].empty()){
+            insertionwithoutmessages(all[j]);
+        }
+    }
+    cout<<"Sort each bucket with insertion sort, and concatenate into one array"<<endl;
+    int k=0;
+    for(vector<int>& l:all){
+        if(!l.empty()){
+            for(double i:l){
+                ar[k]=i;
+                k++;
+            }
+        }
     }
 }
 
@@ -376,10 +484,10 @@ void displayoptions(){
     cout<<"4. Bubble Sort"<<endl;
     cout<<"5. Quicksort"<<endl;
     cout<<"6. Heapsort"<<endl;
-    cout<<"7. Radix Sort"<<endl;
-//    cout<<"8. Counting Sort"<<endl;
-//    cout<<"9. Bucket Sort"<<endl;
-//    cout<<"or press 0 for algorithm info"<<endl;
+    cout<<"7. Counting Sort"<<endl;
+    cout<<"8. Radix Sort"<<endl;
+    cout<<"9. Bucket Sort"<<endl;
+    cout<<"or press 0 for algorithm info"<<endl;
 }
 
 void afteroptions(){
@@ -389,96 +497,135 @@ void afteroptions(){
 }
 
 void displayalgoinfo(){
+    cout<<"------------------------"<<endl;
     cout<<"Mergesort: "<<endl;
-    cout<<"Recursive! This will n combine in order"<<endl;
+    cout<<"Recursive! This breaks the array into 2 smaller arrays until the base case of an array of size 1 is reached,"
+        "\nthen merges these auxiliary arrays in sorted order. This ends up being simple since each auxiliary array"
+        "\ngoing up the call stack will already be in sorted order."<<endl;
     cout<<"Time Complexity: Theta(nlog(n))"<<endl;
     cout<<"Space Complexity: O(n)"<<endl;
     cout<<"------------------------"<<endl;
     cout<<"Insertion Sort: "<<endl;
-    cout<<"insert the next element into its proper spot in the sorted part of the array"<<endl;
-    cout<<"Time Complexity: O(n^2), Omega(n)"<<endl;
+    cout<<"For each element, insert it by pushing it back until it's in its proper spot in the sorted part of the array."<<endl;
+    cout<<"Time Complexity: Omega(n), Theta(n^2), O(n^2)"<<endl;
     cout<<"Space Complexity: O(1)"<<endl;
     cout<<"------------------------"<<endl;
     cout<<"Selection Sort:"<<endl;
-    cout<<"select the next smallest element from the unsorted part of the array and swap"<<endl;
+    cout<<"Go through the unsorted portion of the array to select the next smallest element, and swap with the current."<<endl;
     cout<<"Time Complexity: Theta(n^2)"<<endl;
     cout<<"Space Complexity: O(1)"<<endl;
     cout<<"------------------------"<<endl;
     cout<<"Bubble Sort:"<<endl;
-    cout<<"compare side by side elements and swap if the left one is larger; with each trial of this the next largest element 'bubbles' to the top"<<endl;
-    cout<<"Time Complexity: O(n^2), Omega(n)"<<endl;
+    cout<<"Compare side by side elements and swap if the left one is larger; with each trial of this the next largest"
+        "\nelement 'bubbles' to the top. This needs to be done for n passes, since each pass only brings the"
+        "\nnext largest element to the top."<<endl;
+    cout<<"Time Complexity: Omega(n), Theta(n^2), O(n^2)"<<endl;
     cout<<"Space Complexity: O(1)"<<endl;
     cout<<"------------------------"<<endl;
     cout<<"Quicksort:"<<endl;
-    cout<<"pick a random element and place all numbers greater than it on one side, and less than on the other; repeat this recursively for the two halves"<<endl;
-    cout<<"Time Complexity: O(n^2), Omega(nlog(n))"<<endl;
+    cout<<"Recursive! For each call, a random element called the pivot is chosen and all elements less than it are"
+        "\nplaced to the left, and all elements greater are placed to the right. It is then recursively called on those two halves."
+        "\nA function called partition is used to select the pivot either randomly, or as a fixed array index (here it is fixed, the last index)."<<endl;
+    cout<<"Time Complexity: Omega(nlog(n)), Theta(nlog(n)), O(n^2)"<<endl;
     cout<<"Space Complexity: O(nlog(n))"<<endl;
     cout<<"------------------------"<<endl;
     cout<<"Heapsort:"<<endl;
-    cout<<"treat all elements as a heap (tree) and recursively move the max element to the root and remove it"<<endl;
+    cout<<"Recursive! (kinda) This forms a max heap (basically a binary search tree, but without the rule that the right child is"
+        "\ngreater than the left), and for each node starting from the last leaf, switches it with the root node and calls"
+        "\na function called heapify, which restructures the tree so that the max element is on top again. Each time a max"
+        "\nelement is removed, it is essentially at the end of an array; in other words, is now in sorted position. It should"
+        "\nbe noted that heapsort itself is not recursive, but it calls heapify which is."<<endl;
     cout<<"Time Complexity: Theta(nlog(n))"<<endl;
     cout<<"Space Complexity: O(1)"<<endl;
     cout<<"------------------------"<<endl;
+    cout<<"Counting Sort:"<<endl;
+    cout<<"Create two new arrays, one counting the frequency of occurrence of each number in the array (then adjusted"
+        "\nto represent the array index), and the other to hold the output array. The output array at index i is updated with the"
+        "\nvalue of indexarray[originalarray[i]] for each i in range n. This results in linear runtime, but it only works"
+        "\nif the range of numbers is known beforehand. This is also a stable sort, meaning the order of repeated values doesn't change"<<endl;
+    cout<<"Time Complexity: Theta(n+k) k=range of possible values"<<endl;
+    cout<<"Space Complexity: O(k)"<<endl;
+    cout<<"------------------------"<<endl;
     cout<<"Radix Sort:"<<endl;
-    cout<<"sort all elements by the digit in the 1's place, then by the digit in the 10's place.. continue through the max digit"<<endl;
-    cout<<"Time Complexity: Theta(d(n*k)) d=max # of digits, k=number of possible values for each digit (here is 10 for decimal #s)"<<endl;
+    cout<<"This will first sort all elements by the digit in the 1's place, then by the digit in the 10's place.. continuing"
+          "\nthrough to the last digit. The sorting is done with some stable sorting algorithm (counting sort, for example)."<<endl;
+    cout<<"Time Complexity: Theta(d(n+k)) d=max # of digits, k=base of whatever number we are using (usually 10)"<<endl;
     cout<<"Space Complexity: O(n+k)"<<endl;
+    cout<<"------------------------"<<endl;
+    cout<<"Bucket Sort:"<<endl;
+    cout<<"Adjust input so they are all in range [0:1), and divide range into buckets where certain ranges of values will go."
+          "\nThese buckets, which will ideally be near-sorted, are then sorted using insertion sort."<<endl;
+    cout<<"Time Complexity: Omega(n+k), Theta(n+k), O(n^2)"<<endl;
+    cout<<"Space Complexity: O(n)"<<endl;
 }
 
 void switchloop1(int choice,vector<int> list){
     switch(choice){
+        case 0:
+            displayalgoinfo();
+            break;
         case 1:
             cout<<"Mergesort: "<<endl;
-            cout<<"recursively break the array in half until sub-array lengths are 1, then combine in order"<<endl;
-            cout<<"Time Complexity: Theta(nlog(n))"<<endl;
-            cout<<"Space Complexity: O(n)"<<endl;
+//            cout<<"recursively break the array in half until sub-array lengths are 1, then combine in order"<<endl;
+//            cout<<"Time Complexity: Theta(nlog(n))"<<endl;
+//            cout<<"Space Complexity: O(n)"<<endl;
             merge(list,0,list.size()-1,0);
             break;
         case 2:
             cout<<"Insertion Sort: "<<endl;
-            cout<<"insert the next element into its proper spot in the sorted part of the array"<<endl;
-            cout<<"Time Complexity: O(n^2), Omega(n)"<<endl;
-            cout<<"Space Complexity: O(1)"<<endl;
+//            cout<<"insert the next element into its proper spot in the sorted part of the array"<<endl;
+//            cout<<"Time Complexity: O(n^2), Omega(n)"<<endl;
+//            cout<<"Space Complexity: O(1)"<<endl;
             insertion(list);
             break;
         case 3:
             cout<<"Selection Sort:"<<endl;
-            cout<<"select the next smallest element from the unsorted part of the array and swap"<<endl;
-            cout<<"Time Complexity: Theta(n^2)"<<endl;
-            cout<<"Space Complexity: O(1)"<<endl;
+//            cout<<"select the next smallest element from the unsorted part of the array and swap"<<endl;
+//            cout<<"Time Complexity: Theta(n^2)"<<endl;
+//            cout<<"Space Complexity: O(1)"<<endl;
             selection(list);
             break;
         case 4:
             cout<<"Bubble Sort:"<<endl;
-            cout<<"compare side by side elements and swap if the left one is larger; with each trial of this the next largest element 'bubbles' to the top"<<endl;
-            cout<<"Time Complexity: O(n^2), Omega(n)"<<endl;
-            cout<<"Space Complexity: O(1)"<<endl;
+//            cout<<"compare side by side elements and swap if the left one is larger; with each trial of this the next largest element 'bubbles' to the top"<<endl;
+//            cout<<"Time Complexity: O(n^2), Omega(n)"<<endl;
+//            cout<<"Space Complexity: O(1)"<<endl;
             bubble(list);
             break;
         case 5:
             cout<<"Quicksort:"<<endl;
-            cout<<"pick a random element and place all numbers greater than it on one side, and less than on the other; repeat this recursively for the two halves"<<endl;
-            cout<<"Time Complexity: O(n^2), Omega(nlog(n))"<<endl;
-            cout<<"Space Complexity: O(nlog(n))"<<endl;
-            quick(list,0,list.size()-1);
+//            cout<<"pick a random element and place all numbers greater than it on one side, and less than on the other; repeat this recursively for the two halves"<<endl;
+//            cout<<"Time Complexity: O(n^2), Omega(nlog(n))"<<endl;
+//            cout<<"Space Complexity: O(nlog(n))"<<endl;
+            quick(list,0,list.size()-1,0);
             break;
         case 6:
             cout<<"Heapsort:"<<endl;
-            cout<<"treat all elements as a heap (tree) and recursively move the max element to the root and remove it"<<endl;
-            cout<<"Time Complexity: Theta(nlog(n))"<<endl;
-            cout<<"Space Complexity: O(1)"<<endl;
+//            cout<<"treat all elements as a heap (tree) and recursively move the max element to the root and remove it"<<endl;
+//            cout<<"Time Complexity: Theta(nlog(n))"<<endl;
+//            cout<<"Space Complexity: O(1)"<<endl;
             heap(list);
             break;
         case 7:
+            cout<<"Counting Sort"<<endl;
+            counting(list);
+            break;
+        case 8:
             cout<<"Radix Sort:"<<endl;
-            cout<<"sort all elements by the digit in the 1's place, then by the digit in the 10's place.. continue through the max digit"<<endl;
-            cout<<"Time Complexity: Theta(d(n*k)) d=max # of digits, k=number of possible values for each digit (here is 10 for decimal #s)"<<endl;
-            cout<<"Space Complexity: O(n+k)"<<endl;
+//            cout<<"sort all elements by the digit in the 1's place, then by the digit in the 10's place.. continue through the max digit"<<endl;
+//            cout<<"Time Complexity: Theta(d(n*k)) d=max # of digits, k=number of possible values for each digit (here is 10 for decimal #s)"<<endl;
+//            cout<<"Space Complexity: O(n+k)"<<endl;
             radix(list);
+            break;
+        case 9:
+            cout<<"Bucket Sort"<<endl;
+            bucket(list);
             break;
         default:
             cout<<"No selection made/Invalid selection"<<endl;
     }
+    cout<<"Final Sorted Array: ";
+    print(list);
 }
 
 void switchloop2(int choice,vector<int>& list){
