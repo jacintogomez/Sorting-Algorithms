@@ -179,7 +179,7 @@ void merge(vector<int>& ar,int begin,int end,int step){
     cout<<" this recursive call is "<<step<<" level(s) deep"<<endl;
 }
 
-void bubble(vector<int> ar){
+void bubble(vector<int>& ar){
     for(int i=ar.size()-1;i>=0;i--){
         bool swap=false;
         for(int j=0;j<i;j++) {
@@ -200,7 +200,7 @@ void bubble(vector<int> ar){
     }
 }
 
-void selection(vector<int> ar){
+void selection(vector<int>& ar){
     for(int i=0;i<ar.size();i++){
         int min=i;
         for(int j=i+1;j<ar.size();j++){
@@ -223,7 +223,7 @@ void selection(vector<int> ar){
     }
 }
 
-void insertion(vector<int> ar){
+void insertion(vector<int>& ar){
     for(int i=1;i<ar.size();i++){
         int key=ar[i];
         int j=i-1;
