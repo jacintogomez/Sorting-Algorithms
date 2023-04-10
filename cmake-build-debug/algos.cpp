@@ -499,7 +499,7 @@ void afteroptions(){
 void displayalgoinfo(){
     cout<<"------------------------"<<endl;
     cout<<"Mergesort: "<<endl;
-    cout<<"Recursive! This breaks the array into 2 smaller arrays until the base case of an array of size 1 is reached,"
+    cout<<"Recursive. This breaks the array into 2 smaller arrays until the base case of an array of size 1 is reached,"
         "\nthen merges these auxiliary arrays in sorted order. This ends up being simple since each auxiliary array"
         "\ngoing up the call stack will already be in sorted order."<<endl;
     cout<<"Time Complexity: Theta(nlog(n))"<<endl;
@@ -523,15 +523,15 @@ void displayalgoinfo(){
     cout<<"Space Complexity: O(1)"<<endl;
     cout<<"------------------------"<<endl;
     cout<<"Quicksort:"<<endl;
-    cout<<"Recursive! For each call, a random element called the pivot is chosen and all elements less than it are"
+    cout<<"Recursive. For each call, a random element called the pivot is chosen and all elements less than it are"
         "\nplaced to the left, and all elements greater are placed to the right. It is then recursively called on those two halves."
         "\nA function called partition is used to select the pivot either randomly, or as a fixed array index (here it is fixed, the last index)."<<endl;
     cout<<"Time Complexity: Omega(nlog(n)), Theta(nlog(n)), O(n^2)"<<endl;
     cout<<"Space Complexity: O(nlog(n))"<<endl;
     cout<<"------------------------"<<endl;
     cout<<"Heapsort:"<<endl;
-    cout<<"Recursive! (kinda) This forms a max heap (basically a binary search tree, but without the rule that the right child is"
-        "\ngreater than the left), and for each node starting from the last leaf, switches it with the root node and calls"
+    cout<<"Recursive. This forms a max heap (a tree but with the condition that a parent is greater than a child),"
+        "\nand for each node starting from the last leaf, switches it with the root node and calls"
         "\na function called heapify, which restructures the tree so that the max element is on top again. Each time a max"
         "\nelement is removed, it is essentially at the end of an array; in other words, is now in sorted position. It should"
         "\nbe noted that heapsort itself is not recursive, but it calls heapify which is."<<endl;
@@ -663,9 +663,7 @@ int main(){
     int choice=0;
     cout<<"This program will trace the sorting of an array with whatever sorting algorithm you select"<<endl;
     cout<<"Note that: "<<endl;
-    cout<<"\t1. The output will only appear properly in a compiler that displays all output letters and symbols in fixed sized spaces;"
-          "\n\t   For instance, if your compiler displays iiiii and WWWWW as the same length, then it is good for it; if they appear drastically different"
-          "\n\t   like in a word doc or the Google search bar, it is not"<<endl;
+    cout<<"\t1. The output will only appear properly in a compiler that is monospaced (fixed spacing)"<<endl;
     cout<<"\t2. This program will also not work for negative numbers or inputs other than int"<<endl;
     cout<<"\t3. The array will be sorted in increasing order"<<endl;
     cout<<"Choose an array and enter without brackets or commas, and separated by spaces"<<endl;
