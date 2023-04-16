@@ -393,7 +393,7 @@ void counting(vector<int>& ar){
         count[ar[k]]--;
         cout<<"Output is now --> ";
         printsameline(output);
-        cout<<"Count is now --> ";
+        cout<<"  Count is now --> ";
         print(count);
     }
     ar=output;
@@ -500,7 +500,7 @@ void displayalgoinfo(){
     cout<<"------------------------"<<endl;
     cout<<"Mergesort: "<<endl;
     cout<<"Recursive. This breaks the array into 2 smaller arrays until the base case of an array of size 1 is reached,"
-        "\nthen merges these auxiliary arrays in sorted order. This ends up being simple since each auxiliary array"
+        "\nthen merges these auxiliary arrays in sorted order. This ends up being efficient since each auxiliary array"
         "\ngoing up the call stack will already be in sorted order."<<endl;
     cout<<"Time Complexity: Theta(nlog(n))"<<endl;
     cout<<"Space Complexity: O(n)"<<endl;
@@ -530,7 +530,7 @@ void displayalgoinfo(){
     cout<<"Space Complexity: O(nlog(n))"<<endl;
     cout<<"------------------------"<<endl;
     cout<<"Heapsort:"<<endl;
-    cout<<"Recursive. This forms a max heap (a tree but with the condition that a parent is greater than a child),"
+    cout<<"This forms a max heap (a tree but with the condition that a parent is greater than a child),"
         "\nand for each node starting from the last leaf, switches it with the root node and calls"
         "\na function called heapify, which restructures the tree so that the max element is on top again. Each time a max"
         "\nelement is removed, it is essentially at the end of an array; in other words, is now in sorted position. It should"
@@ -566,44 +566,26 @@ void switchloop1(int choice,vector<int> list){
             break;
         case 1:
             cout<<"Mergesort: "<<endl;
-//            cout<<"recursively break the array in half until sub-array lengths are 1, then combine in order"<<endl;
-//            cout<<"Time Complexity: Theta(nlog(n))"<<endl;
-//            cout<<"Space Complexity: O(n)"<<endl;
             merge(list,0,list.size()-1,0);
             break;
         case 2:
             cout<<"Insertion Sort: "<<endl;
-//            cout<<"insert the next element into its proper spot in the sorted part of the array"<<endl;
-//            cout<<"Time Complexity: O(n^2), Omega(n)"<<endl;
-//            cout<<"Space Complexity: O(1)"<<endl;
             insertion(list);
             break;
         case 3:
             cout<<"Selection Sort:"<<endl;
-//            cout<<"select the next smallest element from the unsorted part of the array and swap"<<endl;
-//            cout<<"Time Complexity: Theta(n^2)"<<endl;
-//            cout<<"Space Complexity: O(1)"<<endl;
             selection(list);
             break;
         case 4:
             cout<<"Bubble Sort:"<<endl;
-//            cout<<"compare side by side elements and swap if the left one is larger; with each trial of this the next largest element 'bubbles' to the top"<<endl;
-//            cout<<"Time Complexity: O(n^2), Omega(n)"<<endl;
-//            cout<<"Space Complexity: O(1)"<<endl;
             bubble(list);
             break;
         case 5:
             cout<<"Quicksort:"<<endl;
-//            cout<<"pick a random element and place all numbers greater than it on one side, and less than on the other; repeat this recursively for the two halves"<<endl;
-//            cout<<"Time Complexity: O(n^2), Omega(nlog(n))"<<endl;
-//            cout<<"Space Complexity: O(nlog(n))"<<endl;
             quick(list,0,list.size()-1,0);
             break;
         case 6:
             cout<<"Heapsort:"<<endl;
-//            cout<<"treat all elements as a heap (tree) and recursively move the max element to the root and remove it"<<endl;
-//            cout<<"Time Complexity: Theta(nlog(n))"<<endl;
-//            cout<<"Space Complexity: O(1)"<<endl;
             heap(list);
             break;
         case 7:
@@ -612,9 +594,6 @@ void switchloop1(int choice,vector<int> list){
             break;
         case 8:
             cout<<"Radix Sort:"<<endl;
-//            cout<<"sort all elements by the digit in the 1's place, then by the digit in the 10's place.. continue through the max digit"<<endl;
-//            cout<<"Time Complexity: Theta(d(n*k)) d=max # of digits, k=number of possible values for each digit (here is 10 for decimal #s)"<<endl;
-//            cout<<"Space Complexity: O(n+k)"<<endl;
             radix(list);
             break;
         case 9:
