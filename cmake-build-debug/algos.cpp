@@ -640,10 +640,10 @@ void switchloop2(int choice,vector<int>& list){
 int main(){
     string ar;
     int choice=0;
-    cout<<"This program will trace the sorting of an array with whatever sorting algorithm you select"<<endl;
+    cout<<"This program will trace the sorting of an array with whatever sorting algorithm you select,"<<endl;
     cout<<"Note that: "<<endl;
     cout<<"\t1. The output will only appear properly in a compiler that is monospaced (fixed spacing)"<<endl;
-    cout<<"\t2. This program will also not work for negative numbers or inputs other than int"<<endl;
+    cout<<"\t2. This program will not work for negative numbers or inputs other than int"<<endl;
     cout<<"\t3. The array will be sorted in increasing order"<<endl;
     cout<<"Choose an array and enter without brackets or commas, and separated by spaces"<<endl;
     cout<<"Example: [3,1,2] should be entered as 3 1 2"<<endl;
