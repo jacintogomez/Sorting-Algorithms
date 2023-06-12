@@ -1,6 +1,4 @@
 //Created by Jacinto Gomez
-//NYU Tandon School of Engineering
-//Cornell College of Engineering
 
 #include <iostream>
 #include <string>
