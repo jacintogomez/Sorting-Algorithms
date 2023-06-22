@@ -21,7 +21,7 @@ void printsameline(vector<int> ar){
 }
 
 bool issorted(vector<int> ar){
-    for(int x=0;x<ar.size()-2;x++){
+    for(int x=0;x<ar.size()-1;x++){
         if(ar[x]>ar[x+1]){return false;}
     }
     return true;
@@ -36,25 +36,26 @@ void shuff(vector<int>& ar,int it){
     cout<<"<--- Attempt "<<it<<endl;
 }
 
-void bogo(vector<int> ar,bool& result){
+void bogo(vector<int>& ar,bool& result){
     int iteration=1;
     while(!issorted(ar)&&iteration<=100){
         shuff(ar,iteration);
         iteration++;
     }
-    if(iteration<=100){return;}
-    result=true;
+    if(iteration<=100){
+        result=true;
+    }
 }
 
 int main(){
-    //vector<int> list={9,88,2000,100,43,546,2,32};
-    vector<int> list={8,1,6};
-    bool result=false;
+    vector<int> list={9,88,2000,100,43,546,2,32};
+    //vector<int> list={8,1,6};
+    bool finished=false;
     cout<<"Bogo Sort"<<endl;
     cout<<"Original Array: ";
     print(list);
-    bogo(list,result);
-    if(result){
+    bogo(list,finished);
+    if(finished){
         cout<<"Final Sorted Array: ";
         print(list);
     }else{
