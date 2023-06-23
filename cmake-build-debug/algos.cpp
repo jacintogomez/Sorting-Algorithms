@@ -5,6 +5,8 @@
 #include <vector>
 #include <cmath>
 #include <limits>
+#include <algorithm>
+#include <random>
 using namespace std;
 
 void print(vector<int> ar){
@@ -450,6 +452,41 @@ void bucket(vector<int>& ar){
     }
 }
 
+bool issorted(vector<int> ar){
+    for(int x=0;x<ar.size()-1;x++){
+        if(ar[x]>ar[x+1]){return false;}
+    }
+    return true;
+}
+
+void shuff(vector<int>& ar,int it){
+    //int n=ar.size();
+    random_device gen;
+    mt19937 rng(gen());
+    shuffle(ar.begin(),ar.end(),rng);
+    printsameline(ar);
+    cout<<"<--- Attempt "<<it<<endl;
+}
+
+void bogosort(vector<int>& ar,bool& result){
+    int iteration=1;
+    while(!issorted(ar)&&iteration<=100){
+        shuff(ar,iteration);
+        iteration++;
+    }
+    if(iteration<=100){
+        result=true;
+    }
+}
+
+void bogo(vector<int>& ar){
+    bool finished=false;
+    bogosort(ar,finished);
+    if(!finished){
+        cout<<"Stopped after 100 iterations, was not sorted :(";
+    }
+}
+
 vector<int> vecmaker(string in){
     vector<int> out={};
     int index=0;
@@ -487,6 +524,7 @@ void displayoptions(){
     cout<<"7. Counting Sort"<<endl;
     cout<<"8. Radix Sort"<<endl;
     cout<<"9. Bucket Sort"<<endl;
+    cout<<"10. Bogosort"<<endl;
     cout<<"or press 0 for algorithm info"<<endl;
 }
 
@@ -557,6 +595,10 @@ void displayalgoinfo(){
           "\nThese buckets, which will ideally be near-sorted, are then sorted using insertion sort."<<endl;
     cout<<"Time Complexity: Omega(n+k), Theta(n+k), O(n^2)"<<endl;
     cout<<"Space Complexity: O(n)"<<endl;
+    cout<<"------------------------"<<endl;
+    cout<<"Bogosort:"<<endl;
+    cout<<"Randomly reorder the array and see if it is sorted or not"<<endl;
+    cout<<"Time Complexity: Omega(0), Theta((n^2)!), O(Infinite)"<<endl<<endl;
 }
 
 void switchloop1(int choice,vector<int> list){
@@ -599,6 +641,10 @@ void switchloop1(int choice,vector<int> list){
         case 9:
             cout<<"Bucket Sort"<<endl;
             bucket(list);
+            break;
+        case 10:
+            cout<<"Bogo Sort"<<endl;
+            bogo(list);
             break;
         default:
             cout<<"No selection made/Invalid selection"<<endl;
